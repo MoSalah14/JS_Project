@@ -1,0 +1,65 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+  <h1 id="wellcome" class="text-center">wellcome @dm!n :)</h1>
+
+  <div class="w-75  mx-auto my-4">
+
+    <label for="productName">productName :</label>
+    <input type="text" class="form-control my-2" id="productName">
+
+    <label for="productPrice">productPrice :</label>
+    <input type="number" class="form-control my-2" id="productPrice">
+
+    <label for="productCategory">productCategory :</label>
+    <input type="text" class="form-control my-2" id="productCategory">
+
+    <label for="productIMG">productIMG :</label>
+    <input type="file" class="form-control my-2" id="productIMG">
+
+    <label for="productDesc">productDesc :</label>
+    <textarea type="text" class="form-control my-2" id="productDesc"></textarea>
+
+    <button id="mainBtn" onclick="addProduct()" class="btn btn-primary">add product</button>
+  </div>
+  <div class="w-75  mx-auto py-4">
+
+    <div class="my-3 w-75 mx-auto">
+      <label for="">Search by Name :</label>
+      <input onkeyup="searchProducts(this.value)" type="text" class="form-control my-2" id="searchInput">
+    </div>
+
+    <table class=" table text-center">
+      <thead>
+        <th>Index</th>
+        <th>ProductName</th>
+        <th>ProductPrice</th>
+        <th>ProductCategory</th>
+        <th>productIMG</th>
+        <th>ProductDesc</th>
+        <th>update</th>
+        <th>delete</th>
+
+
+      </thead>
+      <tbody id="tableRow">
+
+      </tbody>
+    </table>
+
+  </div>
+
+
+
+  <script src="./js/main.js"></script>
+
+</body>
+
+</html>
