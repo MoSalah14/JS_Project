@@ -214,13 +214,18 @@
         if (userRole === "Admin") {
           displayError(
             "roleMessage",
-            "Please Continue Register and Call 01022202732 for Make Your Account Admin."
+            "Please Continue Register and Call 01022202732 To Make Your Account Admin."
           );
           return;
         }
 
+        function ReloadHomePage() {
+          window.location.href = "../../home.html";
+        }
+
         createUserWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
+            debugger;
             const user = userCredential.user;
 
             set(ref(database, "Users/" + user.uid), {
@@ -230,9 +235,12 @@
               Password: password,
               ConfirmPass: confirmPassword,
               Role: userRole,
+            }).then(() => {
+              console.log("Data successfully written to the database");
+              // Redirect to home page after a short delay
+              setTimeout(ReloadHomePage, 1500);
+              console.log("Data successfully written to the database");
             });
-
-            alert("Successful Registration!");
           })
           .catch((error) => {
             const errorCode = error.code;
