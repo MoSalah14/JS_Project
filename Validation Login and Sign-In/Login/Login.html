@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<!-- Created By CodingNepal -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Login Form</title>
+    <link rel="stylesheet" href="css/Style.css" />
+    <style>
+      .error-message {
+        color: red;
+        font-size: 14px;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="title">Login Form</div>
+      <form id="Login-Form">
+        <!-- ====== Email ======= -->
+        <div class="field">
+          <input type="email" required id="login-email" />
+          <label>Email Address</label>
+        </div>
+        <br />
+        <!-- ====== Password ======= -->
+        <div class="field">
+          <input type="password" required id="Login-password" />
+          <label>Password</label>
+        </div>
+        <br />
+        <div id="error" class="error-message"></div>
+        <div class="field">
+          <input type="button" value="Login" id="submitLogin" />
+        </div>
+
+        <div class="signup-link">
+          Dont Have Account?<a href="../Register/Register.html"> Sign Up now</a>
+        </div>
+      </form>
+    </div>
+  </body>
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import {
+      getDatabase,
+      set,
+      ref,
+      update,
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      onAuthStateChanged,
+    } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCUIrO-MDXmcWjwA8owfLJx3JXT021uoh4",
+      authDomain: "validation-52b11.firebaseapp.com",
+      databaseURL: "https://validation-52b11-default-rtdb.firebaseio.com",
+      projectId: "validation-52b11",
+      storageBucket: "validation-52b11.appspot.com",
+      messagingSenderId: "743887404432",
+      appId: "1:743887404432:web:57ab90038b600ecab30715",
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth();
+
+    const getFormValueById = (id) => {
+      return document.getElementById(id).value.trim();
+    };
+
+    const displayError = (id, message) => {
+      document.getElementById(id).textContent = message;
+    };
+
+    const login = document.getElementById("submitLogin");
+
+    login.addEventListener("click", (e) => {
+      const Loginemail = getFormValueById("login-email");
+      const LoginPassword = getFormValueById("Login-password");
+      signInWithEmailAndPassword(auth, Loginemail, LoginPassword)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          const dt = new Date();
+
+          update(ref(database, "Users/" + user.uid), {
+            last_login: dt,
+          });
+
+          alert("User Logged In");
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          const errorElement = document.getElementById("error");
+
+          // Change the content of the error div to "Email not Valid"
+          errorElement.innerText = "Email Or Password Not Valid";
+
+          // You can also add additional styling or classes to the error element if needed
+        });
+    });
+
+    // const user = auth.currentUser;
+    // onAuthStateChanged(auth, (user) => {
+    //   if (user) {
+    //     // User is signed in, see docs for a list of available properties
+    //     // https://firebase.google.com/docs/reference/js/auth.user
+    //     const uid = user.uid;
+    //     // ...
+    //   } else {
+    //     // User is signed out
+    //     // ...
+    //   }
+    // });
+    //========= LogOut ============
+
+    // LogOut.addEventListener("click", (e) => {
+    //   signOut(auth)
+    //     .then(() => {
+    //       // Sign-out successful.
+    //     })
+    //     .catch((error) => {
+    //   const errorCode = error.code;
+    //   const errorMessage = error.message;
+    //   alert(errorMessage);
+    // });
+    // });
+  </script>
+</html>
