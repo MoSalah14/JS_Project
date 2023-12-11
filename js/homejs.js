@@ -100,7 +100,7 @@ if (user) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  debugger
+  debugger;
   const userRole = sessionStorage.getItem("userRole");
 
   // Conditionally show the Admin button
@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   auth.onAuthStateChanged((user) => {
-  debugger
+    debugger;
 
     if (user) {
       document.getElementById("logInButton").style.display = "none";
