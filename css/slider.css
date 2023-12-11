@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .container {
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    margin: 25px;
+    background: white;
+  }
+  .slider-wrapper {
+    position: relative;
+    width: 100%;
+  }
+  .slider-wrapper .image-list {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 25px;
+    font-size: 0; 
+    overflow-x: auto;
+  }
+  .slider-wrapper .image-list .image-item {
+    width: 500px;
+    height: 350px;
+    object-fit: cover;
+  }

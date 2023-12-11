@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log Out</title>
+    <style>
+      /* Add your styling for the log-out message here */
+      #logoutMessage {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .logout-content {
+        text-align: center;
+      }
+
+      #logoutMessage h2 {
+        color: #333;
+      }
+
+      #logoutMessage p {
+        color: #666;
+      }
+
+      #logoutMessage button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      #logoutMessage button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+    >
+  </head>
+  <body>
+    <div id="logoutMessage">
+      <div class="logout-content">
+        <h2>Successfully Logged Out</h2>
+        <p>You have been successfully logged out. Come back soon!</p>
+        <a href="home.html"
+          ><button>
+            Redirect To Home After 3 Second If not Reloaded Click Here
+          </button></a
+        >
+      </div>
+    </div>
+    <script>
+      function RedirectToHome() {
+        window.location.href = "home.html";
+      }
+
+      setTimeout(RedirectToHome, 3000);
+    </script>
+  </body>
+</html>
