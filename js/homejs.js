@@ -1,8 +1,7 @@
-// structure of product hint
 function getallClothes(ob) {
   let boxDiv = document.createElement("div");
   boxDiv.id = "box";
-  // boxLink to page of product details
+
   let boxLink = document.createElement("a");
   boxLink.href = "/productdetails.html?" + count;
   let imgTag = document.createElement("img");
@@ -38,14 +37,13 @@ let men = document.getElementById("men");
 let women = document.getElementById("women");
 let various = document.getElementById("various");
 
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
   getAuth,
   signOut,
   // onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-// Your web app's Firebase configuration
+// My web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCUIrO-MDXmcWjwA8owfLJx3JXT021uoh4",
   authDomain: "validation-52b11.firebaseapp.com",
@@ -102,9 +100,10 @@ if (user) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+  debugger
   const userRole = sessionStorage.getItem("userRole");
 
-  // Conditionally show the admin button
+  // Conditionally show the Admin button
   if (userRole === "Admin") {
     document.getElementById("addProductButton").style.display = "inline";
   } else {
@@ -112,8 +111,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   auth.onAuthStateChanged((user) => {
+  debugger
+
     if (user) {
-      // User is logged in
       document.getElementById("logInButton").style.display = "none";
       document.getElementById("logOutButton").style.display = "inline";
 
@@ -154,6 +154,4 @@ document.addEventListener("DOMContentLoaded", function () {
         alert("Sign-out failed. Please try again.");
       });
   });
-
-  // ...
 });

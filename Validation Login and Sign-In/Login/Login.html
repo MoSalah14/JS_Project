@@ -5,16 +5,23 @@
     <meta charset="utf-8" />
     <title>Login Form</title>
     <link rel="stylesheet" href="css/Style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" 
+    integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../footerValidation.css">
     <style>
       .error-message {
         color: red;
         font-size: 14px;
         margin-top: 5px;
       }
+      
     </style>
   </head>
   <body>
-    <div class="wrapper">
+    <div class="wrapper" style="margin-bottom: 50px; margin-top: 50px;">
       <div class="title">Login Form</div>
       <form id="Login-Form">
         <!-- ====== Email ======= -->
@@ -33,12 +40,61 @@
         <div class="field">
           <input type="button" value="Login" id="submitLogin" />
         </div>
-
+        <a href="../../home.html"></a>
         <div class="signup-link">
           Dont Have Account?<a href="../Register/Register.html"> Sign Up now</a>
         </div>
       </form>
     </div>
+    <!-- footter start -->
+    <footer>
+      <section>    
+          <div id="containerFooter">
+              
+              <div id="webFooter">
+                  <h3> online store </h3>
+                  <p> men clothing </p>
+                  <p> women clothing </p>
+                  <p> men accessories </p>
+                  <p> women accessories </p>
+              </div>
+              <div id="webFooter">
+                  <h3> partners </h3>
+                  <p> zara </p>
+                  <p> pantaloons </p>
+                  <p> levis </p>
+                  <p> ucb </p>
+                  <p> + many more </p>
+              </div>
+              <div id="webFooter">
+                  <h3> follow us </h3>
+                  <p>
+                      <span class="icon"><i class="fa fa-facebook-square" aria-hidden="true"></i></span>
+                      <span class="text">facebook</span>
+                  </p>
+                  <p> 
+                      <span class="icon"><i class="fa fa-instagram" aria-hidden="true"></i></span>
+                      <span class="text">instagram</span>
+                  </p>
+                  <p>
+                      <span class="icon"><i class="fa fa-twitter-square" aria-hidden="true"></i></span>
+                      <span class="text">twitter</span>
+                  </p>
+              </div>
+              <div id="webFooter">
+                  <form action="#">
+                  <input type="text" placeholder="Enter Your problem">
+                  <input type="submit" name="" value="Send">
+                  </form>
+              </div>
+              <div class="bottom">
+                  <p>Copyright © 2023 <a href="#">elmayteen</a> All rights reserved</p>
+              </div>
+              </div>
+          </div>
+      </section>
+
+  </footer>
   </body>
 
   <script type="module">
@@ -49,6 +105,7 @@
       set,
       ref,
       update,
+      get,
     } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
     import {
       getAuth,
@@ -82,40 +139,43 @@
     };
 
     const login = document.getElementById("submitLogin");
-
     login.addEventListener("click", (e) => {
       const Loginemail = getFormValueById("login-email");
       const LoginPassword = getFormValueById("Login-password");
+
       signInWithEmailAndPassword(auth, Loginemail, LoginPassword)
         .then((userCredential) => {
-          // Signed in
           const user = userCredential.user;
           const dt = new Date();
-
           update(ref(database, "Users/" + user.uid), {
             last_login: dt,
           });
+          const userRoleRef = ref(database, "Users/" + user.uid + "/Role");
+          get(userRoleRef)
+            .then((snapshot) => {
+              const userRole = snapshot.val();
+              // console.log("User Role:", userRole);
+              // Save user role to sessionStorage
+              sessionStorage.setItem("userRole", userRole);
 
-          // alert("User Logged In");
-          window.location.href = "../../home.html";
+              window.location.href = "../../home.html";
+            })
+            .catch((error) => {
+              console.error("Error getting user role:", error);
+            });
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           const errorElement = document.getElementById("error");
-
-          // Change the content of the error div to "Email not Valid"
           errorElement.innerText = "Email Or Password Not Valid";
-
-          // You can also add additional styling or classes to the error element if needed
         });
     });
 
     // const user = auth.currentUser;
     // onAuthStateChanged(auth, (user) => {
     //   if (user) {
-    //     // User is signed in, see docs for a list of available properties
-    //     // https://firebase.google.com/docs/reference/js/auth.user
+
     //     const uid = user.uid;
     //     // ...
     //   } else {
@@ -125,16 +185,16 @@
     // });
     //========= LogOut ============
 
-    // LogOut.addEventListener("click", (e) => {
-    //   signOut(auth)
-    //     .then(() => {
-    //       // Sign-out successful.
-    //     })
-    //     .catch((error) => {
-    //   const errorCode = error.code;
-    //   const errorMessage = error.message;
-    //   alert(errorMessage);
-    // });
-    // });
+    LogOut.addEventListener("click", (e) => {
+      signOut(auth)
+        .then(() => {
+          // Sign-out successful.
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          alert(errorMessage);
+        });
+    });
   </script>
 </html>
