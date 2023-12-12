@@ -57,6 +57,7 @@ function dispayProducts(productLiest) {
 }
 
 function clearForm() {
+  productproductType.value = "";
   productNameInput.value = "";
   productPriceInput.value = "";
   productCategoryInput.value = "";
