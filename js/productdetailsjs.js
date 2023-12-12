@@ -1,5 +1,4 @@
-// structure of product details
-
+//region - "GetDa From Homepage"
 function dynamicContentDetails(ob) {
   let mainContainer = document.createElement("div");
   mainContainer.id = "containerD";
@@ -43,7 +42,9 @@ function dynamicContentDetails(ob) {
 
   let buttonDiv = document.createElement("div");
   buttonDiv.id = "button";
+  //endregion
 
+  //region - "Add To Cart and Add To All Products Page"
   let buttonTag = document.createElement("button");
   buttonTag.id = "buybutton";
   buttonDiv.appendChild(buttonTag);
@@ -56,29 +57,45 @@ function dynamicContentDetails(ob) {
     ob.ConfirmEmail = false;
     var data_object = JSON.stringify(ob);
 
-    console.log(ob);
     var previous_data = JSON.parse(localStorage.getItem("cartitems")) || [];
-    var isProductInWishlist =
-      previous_data.filter(
-        (item) => item.name === ob.name && item.description === ob.description
-      ).length > 0;
+    var isProductInWishlist = previous_data.some(
+      (item) =>
+        item.type === ob.type &&
+        item.name === ob.name &&
+        item.photos === ob.photos &&
+        item.description === ob.description &&
+        item.brand === ob.brand &&
+        item.price === ob.price &&
+        item.UserEmail === ob.UserEmail &&
+        item.ConfirmEmail === ob.ConfirmEmail
+    );
     if (!isProductInWishlist) {
       var product_wish = [...previous_data, JSON.parse(data_object)];
       localStorage.setItem("cartitems", JSON.stringify(product_wish));
     }
-    //add to allproduct
+    // =================== Add to Allproduct =============================
     var previous2_data = JSON.parse(localStorage.getItem("AllProducts")) || [];
-    var isProductInWishlist2 =
-      previous2_data.filter(
-        (item) => (item) =>
-          item.name === ob.name && item.description === ob.description
-      ).length > 0;
+    var isProductInWishlist2 = previous2_data.some(
+      (item) =>
+        item.type === ob.type &&
+        item.name === ob.name &&
+        item.photos === ob.photos &&
+        item.description === ob.description &&
+        item.brand === ob.brand &&
+        item.price === ob.price &&
+        item.UserEmail === ob.UserEmail &&
+        item.ConfirmEmail === ob.ConfirmEmail
+    );
     if (!isProductInWishlist2) {
       var product_wish2 = [...previous2_data, JSON.parse(data_object)];
       localStorage.setItem("AllProducts", JSON.stringify(product_wish2));
     }
   };
-  // add to wish list using local storage
+  //endregion
+
+  //region - " Add to Wish List Using Local Storage"
+  //
+  //
   let buttonTagw = document.createElement("button");
   buttonTagw.id = "wishbutton";
   buttonDiv.appendChild(buttonTagw);
@@ -86,13 +103,23 @@ function dynamicContentDetails(ob) {
   let buttonTextw = document.createTextNode("Add to wish list");
   buttonTagw.appendChild(buttonTextw);
   buttonTagw.onclick = function () {
+    var userEmail = localStorage.getItem("userEmail");
+    ob.UserEmail = userEmail;
+    ob.ConfirmEmail = false;
+
     var data_object = JSON.stringify(ob);
     var previous_data = JSON.parse(localStorage.getItem("wishlist")) || [];
-    var isProductInWishlist =
-      previous_data.filter(
-        (item) => (item) =>
-          item.name === ob.name && item.description === ob.description
-      ).length > 0;
+    var isProductInWishlist = previous_data.some(
+      (item) =>
+        item.type === ob.type &&
+        item.name === ob.name &&
+        item.photos === ob.photos &&
+        item.description === ob.description &&
+        item.brand === ob.brand &&
+        item.price === ob.price &&
+        item.UserEmail === ob.UserEmail &&
+        item.ConfirmEmail === ob.ConfirmEmail
+    );
     if (!isProductInWishlist) {
       var product_wish = [...previous_data, JSON.parse(data_object)];
       localStorage.setItem("wishlist", JSON.stringify(product_wish));
@@ -110,10 +137,9 @@ function dynamicContentDetails(ob) {
   detailsDiv.appendChild(buttonDiv);
   return mainContainer;
 }
+//endregion
 
 let id = location.search.split("?")[1];
-console.log(id);
-
 function getproductDetails(params) {
   var storedArrayString = localStorage.getItem("myProducts");
   if (storedArrayString !== null) {
