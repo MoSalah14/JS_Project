@@ -44,8 +44,9 @@ function dispayProducts(productLiest) {
         <td> ${productLiest[i].price}</td>
         <td> ${productLiest[i].type}</td>
         <td> ${productLiest[i].brand}</td>
-        <td> <img style="height: 50px; width: 50px;" src="${productLiest[i].photos ? "../images/" + productLiest[i].photos : ""
-      }" alt=""> </td>
+        <td> <img style="height: 50px; width: 50px;" src="${
+          productLiest[i].photos ? "../images/" + productLiest[i].photos : ""
+        }" alt=""> </td>
         <td> ${productLiest[i].description}</td>
         <td> <button onclick="setForm(${i})" class="btn btn-warning">update</button></td>
         <td> <button onclick="deleteProduct(${i})" class= "btn btn-danger">delete</button></td>
