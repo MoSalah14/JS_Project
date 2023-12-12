@@ -1,4 +1,5 @@
 var productNameInput = document.getElementById("productName");
+var productproductType = document.getElementById("productType");
 var productPriceInput = document.getElementById("productPrice");
 var productCategoryInput = document.getElementById("productCategory");
 var productIMGInput = document.getElementById("productIMG");
@@ -16,13 +17,14 @@ if (localStorage.getItem("myProducts") != null) {
 
 function addProduct() {
   debugger;
-  if (mainBtn.innerHTML == "addProduct") {
+  if (mainBtn.innerHTML == "Add Product") {
     var product = {
-      productName: productNameInput.value,
+      type: productproductType.value,
+      name: productNameInput.value,
+      photos: productIMGInput.files[0] ? productIMGInput.files[0].name : "",
+      description: productDescInput.value,
+      brand: productCategoryInput.value,
       price: productPriceInput.value,
-      img: productIMGInput.files[0] ? productIMGInput.files[0].name : "",
-      category: productCategoryInput.value,
-      desc: productDescInput.value,
     };
     productsContainer.push(product);
     localStorage.setItem("myProducts", JSON.stringify(productsContainer));
@@ -38,13 +40,13 @@ function dispayProducts(productLiest) {
   for (var i = 0; i < productLiest.length; i++) {
     cartoona += `<tr>
         <td id ="test"> ${i + 1}</td>
-        <td> ${productLiest[i].productName}</td>
+        <td> ${productLiest[i].name}</td>
+        <td> ${productLiest[i].type}</td>
         <td> ${productLiest[i].price}</td>
-        <td> ${productLiest[i].category}</td>
-        <td> <img style="height: 50px; width: 50px;" src="${
-          productLiest[i].img ? "../images/" + productLiest[i].img : ""
-        }" alt=""> </td>
-        <td> ${productLiest[i].desc}</td>
+        <td> ${productLiest[i].brand}</td>
+        <td> <img style="height: 50px; width: 50px;" src="${productLiest[i].photos ? "../images/" + productLiest[i].photos : ""
+      }" alt=""> </td>
+        <td> ${productLiest[i].description}</td>
         <td> <button onclick="setForm(${i})" class="btn btn-warning">update</button></td>
         <td> <button onclick="deleteProduct(${i})" class= "btn btn-danger">delete</button></td>
     
@@ -55,6 +57,7 @@ function dispayProducts(productLiest) {
 }
 
 function clearForm() {
+  productproductType.value = "";
   productNameInput.value = "";
   productPriceInput.value = "";
   productCategoryInput.value = "";
