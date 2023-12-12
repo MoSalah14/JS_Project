@@ -1,4 +1,5 @@
 // structure of product details
+
 function dynamicContentDetails(ob) {
   let mainContainer = document.createElement("div");
   mainContainer.id = "containerD";
@@ -50,13 +51,31 @@ function dynamicContentDetails(ob) {
   let buttonText = document.createTextNode("Add to Cart");
   buttonTag.appendChild(buttonText);
   buttonTag.onclick = function () {
+    var userEmail = localStorage.getItem("userEmail");
+    ob.UserEmail = userEmail;
+    ob.ConfirmEmail = false;
     var data_object = JSON.stringify(ob);
+
+    console.log(ob);
     var previous_data = JSON.parse(localStorage.getItem("cartitems")) || [];
     var isProductInWishlist =
-      previous_data.filter((item) => item.id === ob.id).length > 0;
+      previous_data.filter(
+        (item) => item.name === ob.name && item.description === ob.description
+      ).length > 0;
     if (!isProductInWishlist) {
       var product_wish = [...previous_data, JSON.parse(data_object)];
       localStorage.setItem("cartitems", JSON.stringify(product_wish));
+    }
+    //add to allproduct
+    var previous2_data = JSON.parse(localStorage.getItem("AllProducts")) || [];
+    var isProductInWishlist2 =
+      previous2_data.filter(
+        (item) => (item) =>
+          item.name === ob.name && item.description === ob.description
+      ).length > 0;
+    if (!isProductInWishlist2) {
+      var product_wish2 = [...previous2_data, JSON.parse(data_object)];
+      localStorage.setItem("AllProducts", JSON.stringify(product_wish2));
     }
   };
   // add to wish list using local storage
@@ -70,7 +89,10 @@ function dynamicContentDetails(ob) {
     var data_object = JSON.stringify(ob);
     var previous_data = JSON.parse(localStorage.getItem("wishlist")) || [];
     var isProductInWishlist =
-      previous_data.filter((item) => item.id === ob.id).length > 0;
+      previous_data.filter(
+        (item) => (item) =>
+          item.name === ob.name && item.description === ob.description
+      ).length > 0;
     if (!isProductInWishlist) {
       var product_wish = [...previous_data, JSON.parse(data_object)];
       localStorage.setItem("wishlist", JSON.stringify(product_wish));
@@ -91,6 +113,7 @@ function dynamicContentDetails(ob) {
 
 let id = location.search.split("?")[1];
 console.log(id);
+
 function getproductDetails(params) {
   var storedArrayString = localStorage.getItem("myProducts");
   if (storedArrayString !== null) {
