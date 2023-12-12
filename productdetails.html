@@ -8,7 +8,7 @@
         <!-- favicon -->
         <link rel="icon" href="https://yt3.ggpht.com/a/AGF-l78km1YyNXmF0r3-0CycCA0HLA_i6zYn_8NZEg=s900-c-k-c0xffffffff-no-rj-mo" type="image/gif" sizes="16x16">
         <!-- EXTERNAL LINKS -->
-    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="./css/header.css">
     <script src="https://kit.fontawesome.com/4a3b1f73a2.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" 
     integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" 
@@ -20,8 +20,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" 
     integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" 
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="footer.css">
-    <link rel="stylesheet" href="productdetailsstyle.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="./css/productdetailsstyle.css">
+    <link rel="stylesheet" href="./css/homestyle.css">
 </head>
 <body>
             <!-- header start -->
@@ -29,7 +30,7 @@
                 <section>
                     <div id="container">
                         
-                        <div id="shopName"><a href="/home.html?"> <b>NADER</b>shop </a></div>
+                        <div id="shopName"><a href="/home.html"> <b>NADER</b>shop </a></div>
         
                             <div class="search">
                                 <input type='text' placeholder="ًًWhat Are You Looking For?"/>
@@ -37,14 +38,18 @@
                             </div>
                     
                             <div id="user">
-                                <a href="#"> <i class="fa fa-cart-arrow-down" aria-hidden="true"></i><div id="badge"> 0 </div></i></a>
-                                <a href="#"> <i class="fa fa-user-circle-o" aria-hidden="true"></i> </a>
-        
-                            </div> 
+                                <a href="./Cart.html"> <i class="fa fa-cart-arrow-down" aria-hidden="true"></i></i></a>
+                                   <a href="../Validation Login and Sign-In/Login/Login.html">
+                                       <button id="logInButton">Log In</button>
+                                   </a>
+                                <button id="logOutButton">Logout</button>
+               
+                            </div>  
                     </div>
                     <div >
                         <nav>
-                            <a href="#">Home</a>
+                            <a href="./Product.html" id="addProductButton">Add Product</a>
+                            <a href="./home.html">Home</a>
                             <a href="#">About Us</a>
                             <a href="#">Products</a>
                             <a href="#">Help</a>
@@ -57,7 +62,7 @@
     <div id="containerProduct">
         
     </div>
-    <script type="module"  src="productdetailsjs.js"></script>
+    <script type="module"  src="/js/productdetailsjs.js"></script>
             <!-- footter start -->
             <footer>
                 <section>    
@@ -108,6 +113,7 @@
         
             </footer>
             
-            <!-- footter end -->
+            <script type="module" src="js/homejs.js"></script>
+
 </body>
 </html>

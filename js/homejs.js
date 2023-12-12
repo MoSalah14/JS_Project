@@ -35,7 +35,7 @@ function getallClothes(ob) {
 
 let men = document.getElementById("men");
 let women = document.getElementById("women");
-let various = document.getElementById("various");
+let childrens = document.getElementById("childrens");
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
@@ -64,22 +64,6 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 const dp = getDatabase();
 
-function GetAlldata() {
-  const dbRef = ref(dp);
-  get(child(dbRef, "data")).then((snapshot) => {
-    snapshot.forEach((childsnapshot) => {
-      if (childsnapshot.val().type == "men") {
-        men.appendChild(getallClothes(childsnapshot.val()));
-      } else if (childsnapshot.val().type == "women") {
-        women.appendChild(getallClothes(childsnapshot.val()));
-      } else {
-        various.appendChild(getallClothes(childsnapshot.val()));
-      }
-    });
-  });
-}
-window.onload = GetAlldata;
-
 const auth = getAuth();
 const user = auth.currentUser;
 
@@ -103,28 +87,31 @@ document.addEventListener("DOMContentLoaded", function () {
   const userRole = sessionStorage.getItem("userRole");
 
   // Conditionally show the Admin button
-  if (userRole === "Admin") {
-    document.getElementById("addProductButton").style.display = "inline";
-  } else {
-    document.getElementById("addProductButton").style.display = "none";
-  }
+  // if (userRole === "Admin") {
+  //   document.getElementById("addProductButton").style.display = "inline";
+  // } else {
+  //   document.getElementById("addProductButton").style.display = "none";
+  // }
 
   auth.onAuthStateChanged((user) => {
     if (user) {
       document.getElementById("logInButton").style.display = "none";
       document.getElementById("logOutButton").style.display = "inline";
 
-      const userRoleRef = ref(database, "Users/" + user.uid + "/Role");
+      const userRoleRef = ref(dp, "Users/" + user.uid + "/Role");
       get(userRoleRef).then((snapshot) => {
         const userRole = snapshot.val();
 
         // Check user role and show/hide the button
-        if (userRole === "Admin") {
-          // Show "My Product" button
-          document.getElementById("addProductButton").style.display = "inline";
-        } else {
-          // Hide "My Product" button
-          document.getElementById("addProductButton").style.display = "none";
+        const addProductButton = document.getElementById("addProductButton");
+        if (addProductButton) {
+          if (userRole === "Admin") {
+            // Show "My Product" button
+            addProductButton.style.display = "inline";
+          } else {
+            // Hide "My Product" button
+            addProductButton.style.display = "none";
+          }
         }
 
         // Store user role in session storage
@@ -134,7 +121,12 @@ document.addEventListener("DOMContentLoaded", function () {
       // User is logged out
       document.getElementById("logInButton").style.display = "inline";
       document.getElementById("logOutButton").style.display = "none";
-      document.getElementById("addProductButton").style.display = "none";
+
+      // Check and hide "My Product" button if it exists
+      const addProductButton = document.getElementById("addProductButton");
+      if (addProductButton) {
+        addProductButton.style.display = "none";
+      }
     }
   });
 
@@ -152,3 +144,38 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 });
+
+var count = 0;
+function getdata() {
+  var storedArrayString = localStorage.getItem("myProducts");
+  if (storedArrayString !== null) {
+    var myArray = JSON.parse(storedArrayString);
+  }
+  for (let index = 0; index < myArray.length; index++) {
+    if (myArray[index]["type"] == "men") {
+      men.appendChild(getallClothes(myArray[index]));
+      count++;
+    } else if (myArray[index]["type"] == "women") {
+      women.appendChild(getallClothes(myArray[index]));
+      count++;
+    } else {
+      childrens.appendChild(getallClothes(myArray[index]));
+      count++;
+    }
+  }
+}
+getdata();
+
+function searchProducts(term) {
+  var searchProducts = [];
+  for (var i = 0; i < productsContainer.length; i++) {
+    if (
+      productsContainer[i].productName
+        .toLowerCase()
+        .includes(term.toLowerCase())
+    ) {
+      searchProducts.push(productsContainer[i]);
+    }
+  }
+  dispayProducts(searchProducts);
+}

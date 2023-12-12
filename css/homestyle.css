@@ -24,19 +24,23 @@ h1 {
 
 #logOutButton,
 #logInButton {
-  background-color: #090100; /* Red background color */
-  color: white; /* White text color */
-  border: none; /* Remove border */
-  padding: 10px 15px; /* Add padding */
-  cursor: pointer; /* Add cursor pointer */
-  border-radius: 5px; /* Add border radius for rounded corners */
-  margin-left: 10px; /* Add margin to separate from other elements */
+  background-color: #090100;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: 10px;
 }
 
-#logOutButton,
-#logInButton:hover {
-  background-color: #272525; /* Darker red on hover */
+#logOutButton #logInButton:hover {
+  background-color: #343434;
 }
+
+#logOutButton:hover {
+  background-color: #343434;
+}
+
 #men,
 #women,
 #various {
@@ -149,4 +153,25 @@ h2 {
     width: 90%;
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+.search-results {
+  display: none;
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  max-height: 150px;
+  overflow-y: auto;
+  width: 100%;
+  /* Adjust the width as needed */
+}
+
+.result-item {
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid #ddd; /* Add a border between items */
+}
+
+.result-item:hover {
+  background-color: #f1f1f1; /* Highlight on hover */
 }

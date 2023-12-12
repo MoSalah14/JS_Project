@@ -36,10 +36,10 @@
                     
                     <div id="shopName"><a href="home.html"> <b>NADER</b>shop </a></div>
     
-                        <div class="search">
-                            <input type='text' placeholder="ًًWhat Are You Looking For?"/>
-                            <i class="fa fa-search" aria-hidden="true"></i>
-                        </div>
+                    <div class="search">
+                        <input type='text' id="searchInput" placeholder="Search Products" oninput="performSearch()" />
+                        <div id="searchResults" class="search-results"></div>
+                    </div>
                 
                         <div id="user">
                             <a href="./Cart.html"> <i class="fa fa-cart-arrow-down" aria-hidden="true"></i></i></a>
@@ -80,7 +80,7 @@
             </div>
           </div>
           <!-- slider end -->
-
+          <ul id="resultsContainer"></ul>
           <!-- product start -->
         <div id="mainContainer">
 
@@ -148,8 +148,49 @@
             </section>
     
         </footer>
-        
-        <!-- footter end -->
-</body>
-<script type="module" src="js/homejs.js"></script>
+        <script type="module" src="js/homejs.js"></script>
+       <script>
+        // Place your script logic here, including the localStorage setup and performSearch function
+        localStorage.setItem('myProducts', JSON.stringify(products));
+
+        function performSearch() {
+            // Get the input value
+            var searchTerm = document.getElementById("searchInput").value.toLowerCase();
+
+            // Retrieve the products from local storage
+            var storedProducts = JSON.parse(localStorage.getItem('myProducts'));
+
+            // Get the container for search results
+            var searchResultsContainer = document.getElementById("searchResults");
+
+            // Clear previous results
+            searchResultsContainer.innerHTML = "";
+
+            // If there's no search term, hide the results container and exit the function
+            if (!searchTerm) {
+                searchResultsContainer.style.display = "none";
+                return;
+            }
+
+            // Loop through each product to find a match
+            for (var i = 0; i < storedProducts.length; i++) {
+                var product = storedProducts[i];
+                var productName = product.name.toLowerCase();
+
+                // Check if the search term is found in the product name
+                if (productName.includes(searchTerm)) {
+                    // If found, create a dropdown item and append it to the container
+                    var resultItem = document.createElement("div");
+                    resultItem.textContent = product.name;
+                    resultItem.classList.add("result-item");
+                    searchResultsContainer.appendChild(resultItem);
+                }
+            }
+
+            // Show the search results container
+            searchResultsContainer.style.display = "block";
+        }
+       </script>
+       
+        </body>
 </html>
