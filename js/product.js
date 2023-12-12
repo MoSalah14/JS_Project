@@ -41,8 +41,8 @@ function dispayProducts(productLiest) {
     cartoona += `<tr>
         <td id ="test"> ${i + 1}</td>
         <td> ${productLiest[i].name}</td>
-        <td> ${productLiest[i].type}</td>
         <td> ${productLiest[i].price}</td>
+        <td> ${productLiest[i].type}</td>
         <td> ${productLiest[i].brand}</td>
         <td> <img style="height: 50px; width: 50px;" src="${productLiest[i].photos ? "../images/" + productLiest[i].photos : ""
       }" alt=""> </td>
@@ -87,11 +87,12 @@ function searchProducts(term) {
 }
 
 function setForm(productIndex) {
-  productNameInput.value = productsContainer[productIndex].productName;
+  productNameInput.value = productsContainer[productIndex].name;
+  productproductType.value = productsContainer[productIndex].type;
   productPriceInput.value = productsContainer[productIndex].price;
-  productIMGInput.textContent = productsContainer[productIndex].img;
-  productCategoryInput.value = productsContainer[productIndex].category;
-  productDescInput.value = productsContainer[productIndex].desc;
+  productIMGInput.textContent = productsContainer[productIndex].photos;
+  productCategoryInput.value = productsContainer[productIndex].brand;
+  productDescInput.value = productsContainer[productIndex].description;
   mainBtn.innerHTML = "update product";
   document
     .getElementById("mainBtn")
@@ -99,11 +100,12 @@ function setForm(productIndex) {
 }
 
 function updateProduct(productIndex) {
-  productsContainer[productIndex].productName = productNameInput.value;
+  productsContainer[productIndex].name = productNameInput.value;
   productsContainer[productIndex].price = productPriceInput.value;
-  productsContainer[productIndex].img = productIMGInput.value;
-  productsContainer[productIndex].category = productCategoryInput.value;
-  productsContainer[productIndex].desc = productDescInput.value;
+  productsContainer[productIndex].photos = productIMGInput.value;
+  productsContainer[productIndex].brand = productCategoryInput.value;
+  productsContainer[productIndex].description = productDescInput.value;
+  productsContainer[productIndex].type = productproductType.value;
 
   dispayProducts(productsContainer);
   localStorage.setItem("myProducts", JSON.stringify(productsContainer));
