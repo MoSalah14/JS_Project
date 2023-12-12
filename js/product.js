@@ -14,10 +14,10 @@ if (localStorage.getItem("myProducts") != null) {
 } else {
   productsContainer = [];
 }
-// import { addToCart } from "./Cart";
 
 
-addToCart(prod);
+
+
 function addProduct() {
   debugger;
   if (mainBtn.innerHTML == "Add Product") {
@@ -29,7 +29,7 @@ function addProduct() {
       brand: productCategoryInput.value,
       price: productPriceInput.value,
     };
-    
+
     productsContainer.push(product);
     localStorage.setItem("myProducts", JSON.stringify(productsContainer));
     console.log(productsContainer);
@@ -48,9 +48,8 @@ function dispayProducts(productLiest) {
         <td> ${productLiest[i].price}</td>
         <td> ${productLiest[i].type}</td>
         <td> ${productLiest[i].brand}</td>
-        <td> <img style="height: 50px; width: 50px;" src="${
-          productLiest[i].photos ? "../images/" + productLiest[i].photos : ""
-        }" alt=""> </td>
+        <td> <img style="height: 50px; width: 50px;" src="${productLiest[i].photos ? "../images/" + productLiest[i].photos : ""
+      }" alt=""> </td>
         <td> ${productLiest[i].description}</td>
         <td> <button onclick="setForm(${i})" class="btn btn-warning">update</button></td>
         <td> <button onclick="deleteProduct(${i})" class= "btn btn-danger">delete</button></td>
@@ -78,13 +77,10 @@ function deleteProduct(productIndex) {
 }
 
 function searchProducts(term) {
+  debugger
   var searchProducts = [];
   for (var i = 0; i < productsContainer.length; i++) {
-    if (
-      productsContainer[i].productName
-        .toLowerCase()
-        .includes(term.toLowerCase())
-    ) {
+    if (productsContainer[i].name.toLowerCase().includes(term.toLowerCase())) {
       searchProducts.push(productsContainer[i]);
     }
   }
@@ -122,7 +118,3 @@ function updateProduct(productIndex) {
 
 
 
-import { addToCart } from "./Cart";
-
-
-addToCart(prod);
