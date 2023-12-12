@@ -7,6 +7,8 @@
     <title>cart</title>
     <link rel="stylesheet" href="css/all.css">
     <link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="./css/homestyle.css">
+
     <link href='https://fonts.googleapis.com/css?family=Cairo' rel='stylesheet'>
     <!-- شغل نادر حسبي الله  -->
     <title> HEADER | E-COMMERCE WEBSITE </title>
@@ -29,7 +31,7 @@
         <section>
             <div id="container">
 
-                <div id="shopName"><a href="index.html"> <b>NADER</b>shop </a></div>
+                <div id="shopName"><a href="home.html"> <b>NADER</b>shop </a></div>
 
                 <div class="search">
                     <input type='text' placeholder="ًًWhat Are You Looking For?" />
@@ -37,18 +39,17 @@
                 </div>
 
                 <div id="user">
-                    <a href="#"> <i class="fa fa-cart-arrow-down" aria-hidden="true">
-                        </i>
-                        <div id="badge"></div>
-                        </i>
-                    </a>
-                    <a href="#"> <i class="fa fa-user-circle-o" aria-hidden="true"></i> </a>
-
-                </div>
+                    <a href="./Cart.html"> <i class="fa fa-cart-arrow-down" aria-hidden="true"></i></i></a>
+                       <a href="../Validation Login and Sign-In/Login/Login.html">
+                           <button id="logInButton">Log In</button>
+                       </a>
+                    <button id="logOutButton">Logout</button>
+   
+                </div> 
             </div>
             <div>
                 <nav>
-                    <a href="#">Home</a>
+                    <a href="./home.html">Home</a>
                     <a href="#">About Us</a>
                     <a href="#">Products</a>
                     <a href="#">Help</a>
@@ -57,16 +58,6 @@
 
         </section>
     </header>
-
-    <!-- header -->
-    <!-- header -->
-    <!-- header -->
-    <!-- header -->
-
-
-
-
-    <!-- next section is appare when user add some items -->
     <section id="cart">
         <h2>Your Cart</h2>
         <ul id="cart-items"></ul>
@@ -209,6 +200,8 @@
         </div>
     </footer>
     <script src="js/cart.js"></script>
+<!-- <script type="module" src="./js/homejs.js"></script> -->
+    
 </body>
 
 </html>
