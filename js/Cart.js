@@ -72,11 +72,38 @@ function displayCartItems() {
 
         deleteButton.addEventListener("click", () => {
             var index = cartItems.indexOf(item);
+            var iteeem = cartItems[index];
             cartItems.splice(index, 1);
             localStorage.setItem("cartItems", JSON.stringify(cartItems));
+            //
+            var arrayString = localStorage.getItem('AllProducts');
+            var AllProducts = JSON.parse(arrayString);
+            function findObjectsByCriteria(array, criteria) {
+                return array.filter(obj => {
+                    for (let key in criteria) {
+                        if (obj[key] !== criteria[key]) {
+                            return false;
+                        }
+                    }
+                    return true;
+                });
+            }
+            //
+            let foundObjects = findObjectsByCriteria(AllProducts, iteeem);
+            if (foundObjects.length > 0) {
+                alert('Objects found:', foundObjects);
+                debugger
+               
+                AllProducts.splice(foundObjects, 1);
+                localStorage.setItem("AllProducts", JSON.stringify(AllProducts));
+            } else {
+                alert('No objects found');
+            }
+            //
             location.reload()
             displayCartItems();
             updateCartTotal();
+
         });
 
         // Append the HTML elements to the list item
