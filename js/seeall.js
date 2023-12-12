@@ -88,47 +88,46 @@ function displayAllProducts() {
         });
         ///
         ///
-        function findObjectsByCriteria(array, criteria) {
-            return array.filter(obj => {
-                for (let key in criteria) {
-                    if (obj[key] !== criteria[key]) {
-                        return false;
-                    }
-                }
-                return true;
-            });
+       // Move the function declaration to the top
+function findObjectsByCriteria(array, criteria) {
+    return array.filter(obj => {
+        for (let key in criteria) {
+            if (obj[key] !== criteria[key]) {
+                return false;
+            }
         }
+        return true;
+    });
+}
 
-        acceptButton.addEventListener("click", (e) => {
-            e.preventDefault();
-            var index = AllProducts.indexOf(item);
-            var iteeem = AllProducts[index];
+acceptButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    
+    // Move the declaration of cartItems above its usage
+    var arrayString = localStorage.getItem('cartItems');
+    var cartItems = JSON.parse(arrayString);
 
-            var arrayString = localStorage.getItem('cartItems');
-            var cartItems = JSON.parse(arrayString);
+    var index = AllProducts.indexOf(item);
+    var iteeem = AllProducts[index];
+    
+    // Use the findObjectsByCriteria function after its declaration
+    let foundObjects = findObjectsByCriteria(cartItems, iteeem);
+  
+    if (foundObjects.length > 0) {
+        alert('Objects found:', foundObjects);
+        debugger
+        AllProducts[index].ConfirmEmail = true;
+        localStorage.setItem("AllProducts", JSON.stringify(AllProducts));
+        cartItems[foundObjects.length - 1].ConfirmEmail = true;
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    } else {
+        alert('No objects found');
+    }
+    
+    location.reload();
+    displayAllProducts();
+});
 
-            if (!cartItems) {
-                // Handle the case when cartItems is not defined or is null
-                console.error('Cart items not found in local storage.');
-                return;
-            }
-
-            let foundObjects = findObjectsByCriteria(cartItems, iteeem);
-
-            if (foundObjects.length > 0) {
-                alert('Objects found:', foundObjects);
-                debugger
-                AllProducts[index].ConfirmEmail = true;
-                localStorage.setItem("AllProducts", JSON.stringify(AllProducts));
-                cartItems[foundObjects.length - 1].ConfirmEmail = true;
-                localStorage.setItem("cartItems", JSON.stringify(cartItems));
-            } else {
-                alert('No objects found');
-            }
-
-            location.reload();
-            displayAllProducts();
-        });
 
         // Append the HTML elements to the list item
         itemInfo.appendChild(itemName);
