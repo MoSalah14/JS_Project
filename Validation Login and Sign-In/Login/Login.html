@@ -158,6 +158,9 @@
               // Save user role to sessionStorage
               sessionStorage.setItem("userRole", userRole);
 
+              // Set user email in session storage
+              localStorage.setItem("userEmail", user.email);
+
               window.location.href = "../../home.html";
             })
             .catch((error) => {
