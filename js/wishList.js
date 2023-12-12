@@ -1,4 +1,4 @@
-var arrayString = localStorage.getItem('wishList');
+var arrayString = localStorage.getItem('wishlist');
 var cartItems = JSON.parse(arrayString)
 window.onload = checkArray
 
@@ -16,7 +16,7 @@ function checkArray() {
 
 
 function displayCartItems() {
-    var cartItems = JSON.parse(localStorage.getItem("wishList")) || [];
+    var cartItems = JSON.parse(localStorage.getItem("wishlist")) || [];
     var cartList = document.getElementById("cart-items");
     var cartTotal = document.getElementById("cart-total");
     var cartConfirm = document.getElementById("cart-confirm");
@@ -52,7 +52,7 @@ function displayCartItems() {
         deleteButton.addEventListener("click", () => {
             var index = cartItems.indexOf(item);
             cartItems.splice(index, 1);
-            localStorage.setItem("wishList", JSON.stringify(cartItems));
+            localStorage.setItem("wishlist", JSON.stringify(cartItems));
             location.reload()
             displayCartItems();
             updateCartTotal();
