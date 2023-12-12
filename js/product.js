@@ -14,7 +14,10 @@ if (localStorage.getItem("myProducts") != null) {
 } else {
   productsContainer = [];
 }
+// import { addToCart } from "./Cart";
 
+
+addToCart(prod);
 function addProduct() {
   debugger;
   if (mainBtn.innerHTML == "Add Product") {
@@ -26,6 +29,7 @@ function addProduct() {
       brand: productCategoryInput.value,
       price: productPriceInput.value,
     };
+    
     productsContainer.push(product);
     localStorage.setItem("myProducts", JSON.stringify(productsContainer));
     console.log(productsContainer);
@@ -115,3 +119,10 @@ function updateProduct(productIndex) {
   clearForm();
   location.reload();
 }
+
+
+
+import { addToCart } from "./Cart";
+
+
+addToCart(prod);
