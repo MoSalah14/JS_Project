@@ -1,4 +1,16 @@
-var cartitems = JSON.parse(localStorage.getItem("cartitems"));
+// Retrieve the user's email from local storage
+const userEmail = localStorage.getItem("userEmail");
+
+// Retrieve cart items from local storage
+const cartItems = JSON.parse(localStorage.getItem("cartitems")) || [];
+
+// Filter cart items based on the user's email
+const userCartItems = cartItems.filter(function (item) {
+  return item.UserEmail === userEmail;
+});
+
+// Now, userCartItems contains all cart items related to the user's email
+console.log(userCartItems);
 
 window.onload = checkArray;
 

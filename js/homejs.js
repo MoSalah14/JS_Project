@@ -67,31 +67,26 @@ const dp = getDatabase();
 const auth = getAuth();
 const user = auth.currentUser;
 
-if (user) {
-  const userRoleRef = ref(database, "Users/" + user.uid + "/Role");
-  get(userRoleRef).then((snapshot) => {
-    const userRole = snapshot.val();
+// if (user) {
+//   const userRoleRef = ref(database, "Users/" + user.uid + "/Role");
+//   get(userRoleRef).then((snapshot) => {
+//     const userRole = snapshot.val();
 
-    // Check user role and show/hide the button
-    if (userRole === "Admin") {
-      // Show "My Product" button
-      document.getElementById("myProductButton").style.display = "block";
-    } else {
-      // Hide "My Product" button
-      document.getElementById("myProductButton").style.display = "none";
-    }
-  });
-}
+//     // Check user role and show/hide the button
+//     // if (userRole === "Admin") {
+//     //   // Show "My Product" button
+//     //   document.getElementById("myProductButton").style.display = "block";
+//     //   document.getElementById("HomeCategory").style.display = "block";
+//     // } else {
+//     //   // Hide "My Product" button
+//     //   document.getElementById("myProductButton").style.display = "none";
+//     //   document.getElementById("HomeCategory").style.display = "none";
+//     // }
+//   });
+// }
 
 document.addEventListener("DOMContentLoaded", function () {
   const userRole = sessionStorage.getItem("userRole");
-
-  // Conditionally show the Admin button
-  // if (userRole === "Admin") {
-  //   document.getElementById("addProductButton").style.display = "inline";
-  // } else {
-  //   document.getElementById("addProductButton").style.display = "none";
-  // }
 
   auth.onAuthStateChanged((user) => {
     if (user) {
@@ -103,17 +98,19 @@ document.addEventListener("DOMContentLoaded", function () {
         const userRole = snapshot.val();
 
         // Check user role and show/hide the button
+
+        const CategoryButton = document.getElementById("HomeCategory");
         const addProductButton = document.getElementById("addProductButton");
         if (addProductButton) {
           if (userRole === "Admin") {
-            // Show "My Product" button
+            CategoryButton.style.display = "inline";
             addProductButton.style.display = "inline";
           } else {
-            // Hide "My Product" button
+            // Hide button
             addProductButton.style.display = "none";
+            CategoryButton.style.display = "none";
           }
         }
-
         // Store user role in session storage
         sessionStorage.setItem("userRole", userRole);
       });
@@ -122,10 +119,11 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("logInButton").style.display = "inline";
       document.getElementById("logOutButton").style.display = "none";
 
-      // Check and hide "My Product" button if it exists
+      const MyCategoryBottom = document.getElementById("HomeCategory");
       const addProductButton = document.getElementById("addProductButton");
-      if (addProductButton) {
+      if (addProductButton && MyCategoryBottom) {
         addProductButton.style.display = "none";
+        MyCategoryBottom.style.display = "none";
       }
     }
   });
