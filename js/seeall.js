@@ -1,13 +1,13 @@
-var arrayString = localStorage.getItem('AllProducts');
-var AllProducts = JSON.parse(arrayString)
+var arrayString = localStorage.getItem('cartitems');
+var cartitems = JSON.parse(arrayString)
 window.onload = checkArray
 
 function checkArray() {
-    if (AllProducts.length === 0) {
+    if (cartitems.length === 0) {
         document.getElementById("contentCart").style.display = "block"
         document.getElementById("cart").style.display = "none"
     }
-    else if (AllProducts.length > 0) {
+    else if (cartitems.length > 0) {
         document.getElementById("contentCart").style.display = "none"
         document.getElementById("cart").style.display = "block"
     }
@@ -15,8 +15,8 @@ function checkArray() {
 
 
 
-function displayAllProducts() {
-    var AllProducts = JSON.parse(localStorage.getItem("AllProducts")) || [];
+function displaycartitems() {
+    var cartitems = JSON.parse(localStorage.getItem("cartitems")) || [];
     var cartList = document.getElementById("cart-items");
     var cartTotal = document.getElementById("cart-total");
     var cartConfirm = document.getElementById("cart-confirm");
@@ -24,7 +24,7 @@ function displayAllProducts() {
     cartList.innerHTML = "";
 
     // Loop through each item in the cart
-    AllProducts.forEach(item => {
+    cartitems.forEach(item => {
         // Create HTML elements for the item
         var itemImage = document.createElement("img");
         var itemName = document.createElement("span");
@@ -54,79 +54,28 @@ function displayAllProducts() {
 
 
         deleteButton.addEventListener("click", () => {
-            var index = AllProducts.indexOf(item);
-            var iteeem = AllProducts[index];
-            AllProducts.splice(index, 1);
-            localStorage.setItem("AllProducts", JSON.stringify(AllProducts));
-
-
-            var arrayString = localStorage.getItem('cartItems');
-            var cartItems = JSON.parse(arrayString);
-            function findObjectsByCriteria(array, criteria) {
-                return array.filter(obj => {
-                    for (let key in criteria) {
-                        if (obj[key] !== criteria[key]) {
-                            return false;
-                        }
-                    }
-                    return true;
-                });
-            }
-            //
-            let foundObjects = findObjectsByCriteria(cartItems, iteeem);
-            if (foundObjects.length > 0) {
-                alert('Objects found:', foundObjects);
-                debugger
-                var ix = [foundObjects.length];
-                cartItems.splice(ix, 1);
-                localStorage.setItem("cartItems", JSON.stringify(cartItems));
-            } else {
-                alert('No objects found');
-            }
+            var index = cartitems.indexOf(item);
+            var iteeem = cartitems[index];
+            cartitems.splice(index, 1);
+            localStorage.setItem("cartitems", JSON.stringify(cartitems));
             location.reload()
-            displayAllProducts();
+            displaycartitems();
         });
         ///
         ///
-       // Move the function declaration to the top
-function findObjectsByCriteria(array, criteria) {
-    return array.filter(obj => {
-        for (let key in criteria) {
-            if (obj[key] !== criteria[key]) {
-                return false;
-            }
-        }
-        return true;
-    });
-}
+        // Move the function declaration to the top
 
-acceptButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    
-    // Move the declaration of cartItems above its usage
-    var arrayString = localStorage.getItem('cartItems');
-    var cartItems = JSON.parse(arrayString);
-
-    var index = AllProducts.indexOf(item);
-    var iteeem = AllProducts[index];
-    
-    // Use the findObjectsByCriteria function after its declaration
-    let foundObjects = findObjectsByCriteria(cartItems, iteeem);
-  
-    if (foundObjects.length > 0) {
-        alert('Objects found:', foundObjects);
-        debugger
-        AllProducts[index].ConfirmEmail = true;
-        localStorage.setItem("AllProducts", JSON.stringify(AllProducts));
-        cartItems[foundObjects.length - 1].ConfirmEmail = true;
-        localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    } else {
-        alert('No objects found');
-    }
-    
-    location.reload();
-    displayAllProducts();
-});
+        acceptButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            // Move the declaration of cartitems above its usage
+            var index = cartitems.indexOf(item);
+            var iteeem = cartitems[index];
+            debugger
+            cartitems[index].ConfirmEmail = true;
+            localStorage.setItem("cartitems", JSON.stringify(cartitems));
+            location.reload();
+            displaycartitems();
+        });
 
 
         // Append the HTML elements to the list item
@@ -145,5 +94,5 @@ acceptButton.addEventListener("click", (e) => {
 
 }
 
-displayAllProducts();
+displaycartitems();
 
