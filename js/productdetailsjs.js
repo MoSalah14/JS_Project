@@ -8,8 +8,14 @@ function dynamicContentDetails(ob) {
   imageSectionDiv.id = "imageSection";
 
   let imgTag = document.createElement("img");
-  imgTag.id = "imgDetails";
-  imgTag.src = ob.photos;
+
+  // Check if the photo is a link or a local path
+  if (ob.photos.startsWith("http") || ob.photos.startsWith("www")) {
+    // Assuming it's a link
+    imgTag.src = ob.photos;
+  } else {
+    imgTag.src = "./images/" + ob.photos;
+  }
 
   imageSectionDiv.appendChild(imgTag);
 

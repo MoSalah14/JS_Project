@@ -4,8 +4,16 @@ function getallClothes(ob) {
 
   let boxLink = document.createElement("a");
   boxLink.href = "/productdetails.html?" + count;
+
   let imgTag = document.createElement("img");
-  imgTag.src = ob.photos;
+
+  // Check if the photo is a link or a local path
+  if (ob.photos.startsWith("http") || ob.photos.startsWith("www")) {
+    
+    imgTag.src = ob.photos;
+  } else {
+    imgTag.src = "./images/" + ob.photos;
+  }
 
   let detailsDiv = document.createElement("div");
   detailsDiv.id = "details";
