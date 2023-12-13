@@ -35,7 +35,7 @@ function getallClothes(ob) {
 
 let men = document.getElementById("men");
 let women = document.getElementById("women");
-let childrens = document.getElementById("childrens");
+let Mix = document.getElementById("Mix");
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
@@ -66,24 +66,6 @@ const dp = getDatabase();
 
 const auth = getAuth();
 const user = auth.currentUser;
-
-// if (user) {
-//   const userRoleRef = ref(database, "Users/" + user.uid + "/Role");
-//   get(userRoleRef).then((snapshot) => {
-//     const userRole = snapshot.val();
-
-//     // Check user role and show/hide the button
-//     // if (userRole === "Admin") {
-//     //   // Show "My Product" button
-//     //   document.getElementById("myProductButton").style.display = "block";
-//     //   document.getElementById("HomeCategory").style.display = "block";
-//     // } else {
-//     //   // Hide "My Product" button
-//     //   document.getElementById("myProductButton").style.display = "none";
-//     //   document.getElementById("HomeCategory").style.display = "none";
-//     // }
-//   });
-// }
 
 document.addEventListener("DOMContentLoaded", function () {
   const userRole = sessionStorage.getItem("userRole");
@@ -157,7 +139,7 @@ function getdata() {
       women.appendChild(getallClothes(myArray[index]));
       count++;
     } else {
-      childrens.appendChild(getallClothes(myArray[index]));
+      Mix.appendChild(getallClothes(myArray[index]));
       count++;
     }
   }
