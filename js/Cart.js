@@ -1,16 +1,17 @@
 // Retrieve the user's email from local storage
-const userEmail = localStorage.getItem("userEmail");
+var userEmail = localStorage.getItem("userEmail");
 
 // Retrieve cart items from local storage
-const cartItems = JSON.parse(localStorage.getItem("cartitems")) || [];
+var cartitems = JSON.parse(localStorage.getItem("cartitems")) || [];
 
 // Filter cart items based on the user's email
-const userCartItems = cartItems.filter(function (item) {
+var userCartItems = cartitems.filter(function (item) {
   return item.UserEmail === userEmail;
 });
-
 // Now, userCartItems contains all cart items related to the user's email
 console.log(userCartItems);
+cartitems = [];
+cartitems = userCartItems;
 
 window.onload = checkArray;
 
@@ -27,30 +28,49 @@ function checkArray() {
 function displaycartitems() {
   var cartList = document.getElementById("cart-items");
   var cartTotal = document.getElementById("cart-total");
-
+  var cartConfirm = document.getElementById("cart-confirm");
   cartList.innerHTML = "";
 
   // Loop through each item in the cart
   cartitems.forEach((item) => {
     var listItem = document.createElement("li");
+    var itemImage = document.createElement("img");
+    var itemInfo = document.createElement("div");
     var itemName = document.createElement("span");
     var itemPrice = document.createElement("span");
+    var itemActions = document.createElement("div");
+    var itemQuantity = document.createElement("input");
     var itemTotal = document.createElement("span");
     var deleteButton = document.createElement("button");
 
+    // Set attributes and content for the HTML elements
+    itemImage.src = item.image;
     itemName.textContent = item.name;
-    itemPrice.textContent = `Price: ${item.price}`;
-    itemTotal.textContent = `Total: ${item.price}`;
+    itemPrice.textContent = item.price;
+    itemQuantity.type = "number";
+    itemQuantity.min = "1";
+    itemQuantity.value = "1";
+    itemTotal.textContent = item.price;
     deleteButton.textContent = "X";
 
-    listItem.appendChild(itemName);
-    listItem.appendChild(itemPrice);
-    listItem.appendChild(itemTotal);
-    listItem.appendChild(deleteButton);
+    // Add classes to the HTML elements
+    itemInfo.classList.add("item-info");
+    itemName.classList.add("item-name");
+    itemPrice.classList.add("item-price");
+    itemActions.classList.add("item-actions");
+    itemQuantity.classList.add("item-quantity");
+    itemTotal.classList.add("item-total");
 
-    // Append the list item to the cart list
-    cartList.appendChild(listItem);
-
+    // Add event listeners for the quantity input and delete button
+    itemQuantity.addEventListener("input", () => {
+      var quantityInput = itemQuantity;
+      var quantity = parseInt(quantityInput.value);
+      var price = parseInt(item.price);
+      var totalPrice = quantity * price;
+      itemTotal.textContent = `EGP ${totalPrice.toFixed(2)}`
+      updateCartTotal();
+      console.log(totalPrice);
+    });
     // Add event listener for the delete button
     deleteButton.addEventListener("click", () => {
       var index = cartitems.indexOf(item);
@@ -92,32 +112,48 @@ function displaycartitems() {
       displaycartitems();
       updateCartTotal();
     });
+
+    // Append the HTML elements to the list item
+    itemInfo.appendChild(itemName);
+    itemInfo.appendChild(itemPrice);
+    itemActions.appendChild(itemQuantity);
+    itemActions.appendChild(itemTotal);
+    itemActions.appendChild(deleteButton);
+    listItem.appendChild(itemImage);
+    listItem.appendChild(itemInfo);
+    listItem.appendChild(itemActions);
+
+    // Append the list item to the cart list
+    cartList.appendChild(listItem);
   });
 
   updateCartTotal();
 
   // Show/hide elements based on cart items
-  if (cartitems.length === 0) {
-    document.getElementById("contentCart").style.display = "block";
-    document.getElementById("cart").style.display = "none";
-  } else {
-    document.getElementById("contentCart").style.display = "none";
-    document.getElementById("cart").style.display = "block";
-  }
+  // if (cartitems.length === 0) {
+  //   document.getElementById("contentCart").style.display = "block";
+  //   document.getElementById("cart").style.display = "none";
+  // } else {
+  //   document.getElementById("contentCart").style.display = "none";
+  //   document.getElementById("cart").style.display = "block";
+  // }
 }
 
 function updateCartTotal() {
+  debugger
+
   var cartTotal = document.getElementById("cart-total");
   let total = 0;
-
   // Loop through each item in the cart and add up the total price
-  cartitems.forEach((item) => {
+  cartitems.forEach(item => {
+    debugger
     var quantity = parseInt(item.quantity) || 1;
-    var price = parseInt(item.price.replace("EGP", "").trim());
+    var price = parseInt(item.price);
     var totalPrice = quantity * price;
     total += totalPrice;
     cartTotal.textContent = `Total: EGP ${total.toFixed(2)}`;
   });
+
 }
 
 //checkout button
