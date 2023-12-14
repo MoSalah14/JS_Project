@@ -33,6 +33,9 @@ function displaycartitems() {
 
   // Loop through each item in the cart
   cartitems.forEach((item) => {
+    debugger;
+    // console.log("Item Image:", item.image);
+
     var listItem = document.createElement("li");
     var itemImage = document.createElement("img");
     var itemInfo = document.createElement("div");
@@ -42,9 +45,14 @@ function displaycartitems() {
     var itemQuantity = document.createElement("input");
     var itemTotal = document.createElement("span");
     var deleteButton = document.createElement("button");
+    console.log(item.photos);
 
     // Set attributes and content for the HTML elements
-    itemImage.src = item.image;
+    if (item && item.photos) {
+      itemImage.src = item.photos.startsWith("https")
+        ? item.photos
+        : `./images/${item.photos}`;
+    }
     itemName.textContent = item.name;
     itemPrice.textContent = item.price;
     itemQuantity.type = "number";
@@ -52,6 +60,7 @@ function displaycartitems() {
     itemQuantity.value = "1";
     itemTotal.textContent = item.price;
     deleteButton.textContent = "X";
+    console.log(item.image);
 
     // Add classes to the HTML elements
     itemInfo.classList.add("item-info");
@@ -67,7 +76,7 @@ function displaycartitems() {
       var quantity = parseInt(quantityInput.value);
       var price = parseInt(item.price);
       var totalPrice = quantity * price;
-      itemTotal.textContent = `EGP ${totalPrice.toFixed(2)}`
+      itemTotal.textContent = `EGP ${totalPrice.toFixed(2)}`;
       updateCartTotal();
       console.log(totalPrice);
     });
@@ -140,20 +149,19 @@ function displaycartitems() {
 }
 
 function updateCartTotal() {
-  debugger
+  debugger;
 
   var cartTotal = document.getElementById("cart-total");
   let total = 0;
   // Loop through each item in the cart and add up the total price
-  cartitems.forEach(item => {
-    debugger
+  cartitems.forEach((item) => {
+    debugger;
     var quantity = parseInt(item.quantity) || 1;
     var price = parseInt(item.price);
     var totalPrice = quantity * price;
     total += totalPrice;
     cartTotal.textContent = `Total: EGP ${total.toFixed(2)}`;
   });
-
 }
 
 //checkout button
