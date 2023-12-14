@@ -9,7 +9,6 @@ function getallClothes(ob) {
 
   // Check if the photo is a link or a local path
   if (ob.photos.startsWith("http") || ob.photos.startsWith("www")) {
-    
     imgTag.src = ob.photos;
   } else {
     imgTag.src = "./images/" + ob.photos;
@@ -45,6 +44,8 @@ let men = document.getElementById("men");
 let women = document.getElementById("women");
 let Mix = document.getElementById("Mix");
 
+
+// region - "Configurations Firebase"
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
   getAuth,
@@ -70,8 +71,11 @@ import {
   child,
   get,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-const dp = getDatabase();
 
+//endregion
+
+
+const dp = getDatabase();
 const auth = getAuth();
 const user = auth.currentUser;
 
@@ -91,14 +95,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const CategoryButton = document.getElementById("HomeCategory");
         const addProductButton = document.getElementById("addProductButton");
+        const AllOrderPage = document.getElementById("AllOrderPage");
         if (addProductButton) {
           if (userRole === "Admin") {
             CategoryButton.style.display = "inline";
             addProductButton.style.display = "inline";
+            AllOrderPage.style.display = "inline";
           } else {
             // Hide button
             addProductButton.style.display = "none";
             CategoryButton.style.display = "none";
+            AllOrderPage.style.display = "none";
           }
         }
         // Store user role in session storage
@@ -111,9 +118,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const MyCategoryBottom = document.getElementById("HomeCategory");
       const addProductButton = document.getElementById("addProductButton");
-      if (addProductButton && MyCategoryBottom) {
+      const addOrderSignOut = document.getElementById("AllOrderPage");
+      if (addProductButton && MyCategoryBottom && addProductButton) {
         addProductButton.style.display = "none";
         MyCategoryBottom.style.display = "none";
+        addOrderSignOut.style.display = "none";
       }
     }
   });

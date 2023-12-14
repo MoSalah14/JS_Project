@@ -1,3 +1,6 @@
+
+
+//region -"Catch Tags"
 var productNameInput = document.getElementById("productName");
 var productproductType = document.getElementById("productType");
 var productPriceInput = document.getElementById("productPrice");
@@ -5,18 +8,15 @@ var productCategoryInput = document.getElementById("productCategory");
 var productIMGInput = document.getElementById("productIMG");
 var productDescInput = document.getElementById("productDesc");
 var mainBtn = document.getElementById("mainBtn");
+//endregion
 
 var productsContainer;
-
 if (localStorage.getItem("myProducts") != null) {
   productsContainer = JSON.parse(localStorage.getItem("myProducts"));
   dispayProducts(productsContainer);
 } else {
   productsContainer = [];
 }
-
-
-
 
 function addProduct() {
   debugger;
@@ -48,8 +48,9 @@ function dispayProducts(productLiest) {
         <td> ${productLiest[i].price}</td>
         <td> ${productLiest[i].type}</td>
         <td> ${productLiest[i].brand}</td>
-        <td> <img style="height: 50px; width: 50px;" src="${productLiest[i].photos ? "../images/" + productLiest[i].photos : ""
-      }" alt=""> </td>
+        <td> <img style="height: 50px; width: 50px;" src="${
+          productLiest[i].photos ? "../images/" + productLiest[i].photos : ""
+        }" alt=""> </td>
         <td> ${productLiest[i].description}</td>
         <td> <button onclick="setForm(${i})" class="btn btn-warning">update</button></td>
         <td> <button onclick="deleteProduct(${i})" class= "btn btn-danger">delete</button></td>
@@ -77,7 +78,7 @@ function deleteProduct(productIndex) {
 }
 
 function searchProducts(term) {
-  debugger
+  debugger;
   var searchProducts = [];
   for (var i = 0; i < productsContainer.length; i++) {
     if (productsContainer[i].name.toLowerCase().includes(term.toLowerCase())) {
@@ -115,6 +116,3 @@ function updateProduct(productIndex) {
   clearForm();
   location.reload();
 }
-
-
-

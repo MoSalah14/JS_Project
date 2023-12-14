@@ -33,12 +33,12 @@ h1 {
   margin-left: 10px;
 }
 
-#logOutButton #logInButton:hover {
-  background-color: #343434;
+#logInButton:hover {
+  background-color: #191818;
 }
 
 #logOutButton:hover {
-  background-color: #343434;
+  background-color: #191818;
 }
 
 #men,

@@ -8,7 +8,7 @@ var cartitems = JSON.parse(localStorage.getItem("cartitems")) || [];
 var userCartItems = cartitems.filter(function (item) {
   return item.UserEmail === userEmail;
 });
-// Now, userCartItems contains all cart items related to the user's email
+// userCartItems contains all cart items related to the user's email
 console.log(userCartItems);
 cartitems = [];
 cartitems = userCartItems;
@@ -137,15 +137,6 @@ function displaycartitems() {
   });
 
   updateCartTotal();
-
-  // Show/hide elements based on cart items
-  // if (cartitems.length === 0) {
-  //   document.getElementById("contentCart").style.display = "block";
-  //   document.getElementById("cart").style.display = "none";
-  // } else {
-  //   document.getElementById("contentCart").style.display = "none";
-  //   document.getElementById("cart").style.display = "block";
-  // }
 }
 
 function updateCartTotal() {
