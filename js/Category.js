@@ -1,8 +1,5 @@
-
-
 //region - "Catch IDs"
 var CategoryNameInput = document.getElementById("CategoryName");
-var CategoryIMGInput = document.getElementById("CategoryIMG");
 var CategoryDescInput = document.getElementById("CategoryDesc");
 var mainBtn = document.getElementById("mainBtn");
 //endregion
@@ -14,10 +11,10 @@ if (localStorage.getItem("myCategory") != null) {
 } else CategoryContainer = [];
 
 function addProduct() {
+  debugger;
   if (mainBtn.innerHTML == "add Category") {
     var product = {
       CategoryName: CategoryNameInput.value,
-      img: CategoryIMGInput.value,
       desc: CategoryDescInput.value,
     };
     CategoryContainer.push(product);
@@ -35,7 +32,7 @@ function dispayProducts(productLiest) {
     cartoona += `<tr>
         <td id ="test"> ${i + 1}</td>
         <td> ${productLiest[i].CategoryName}</td>
-        <td> ${productLiest[i].img}</td>
+        
         <td> ${productLiest[i].desc}</td>
         <td> <button onclick="setForm(${i})" class="btn btn-warning">update</button></td>
         <td> <button onclick="deleteProduct(${i})" class= "btn btn-danger">delete</button></td>
@@ -49,7 +46,6 @@ function dispayProducts(productLiest) {
 function clearForm() {
   CategoryNameInput.value = "";
   CategoryDescInput.value = "";
-  CategoryIMGInput.value = "";
 }
 
 function deleteProduct(productIndex) {
@@ -74,7 +70,6 @@ function searchProducts(term) {
 
 function setForm(productIndex) {
   CategoryNameInput.value = CategoryContainer[productIndex].CategoryName;
-  CategoryIMGInput.textContent = CategoryContainer[productIndex].img;
   CategoryDescInput.value = CategoryContainer[productIndex].desc;
   mainBtn.innerHTML = "update Category";
   document
@@ -84,7 +79,6 @@ function setForm(productIndex) {
 
 function updateProduct(productIndex) {
   CategoryContainer[productIndex].CategoryName = CategoryNameInput.value;
-  CategoryContainer[productIndex].img = CategoryIMGInput.value;
   CategoryContainer[productIndex].desc = CategoryDescInput.value;
 
   dispayProducts(CategoryContainer);
