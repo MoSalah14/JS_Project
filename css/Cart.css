@@ -270,6 +270,7 @@ ul {
 #cart-items li .item-total {
     font-weight: bold;
     margin-left: 100px;
+    margin-right: 100px;
 }
 
 #cart-items li button {

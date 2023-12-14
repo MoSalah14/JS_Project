@@ -41,6 +41,7 @@ function displaycartitems() {
     var itemInfo = document.createElement("div");
     var itemName = document.createElement("span");
     var itemPrice = document.createElement("span");
+    var itemStatus = document.createElement("span");
     var itemActions = document.createElement("div");
     var itemQuantity = document.createElement("input");
     var itemTotal = document.createElement("span");
@@ -48,16 +49,24 @@ function displaycartitems() {
     console.log(item.photos);
 
     // Set attributes and content for the HTML elements
+    // var isConfirmed = localStorage.getItem('ConfirmEmail') === 'true';
+
+
+
+// Set the text content based on the value of confirmemail
     if (item && item.photos) {
       itemImage.src = item.photos.startsWith("https")
-        ? item.photos
-        : `./images/${item.photos}`;
+      ? item.photos
+      : `./images/${item.photos}`;
     }
+    debugger
+    var IsConfirmed = item.ConfirmEmail == true;
     itemName.textContent = item.name;
     itemPrice.textContent = item.price;
     itemQuantity.type = "number";
     itemQuantity.min = "1";
     itemQuantity.value = "1";
+    itemStatus.textContent = IsConfirmed ? 'Confirmed' : 'Pending';
     itemTotal.textContent = item.price;
     deleteButton.textContent = "X";
     console.log(item.image);
@@ -68,6 +77,7 @@ function displaycartitems() {
     itemPrice.classList.add("item-price");
     itemActions.classList.add("item-actions");
     itemQuantity.classList.add("item-quantity");
+    itemStatus.classList.add("item-name");
     itemTotal.classList.add("item-total");
 
     // Add event listeners for the quantity input and delete button
@@ -127,6 +137,7 @@ function displaycartitems() {
     itemInfo.appendChild(itemPrice);
     itemActions.appendChild(itemQuantity);
     itemActions.appendChild(itemTotal);
+    itemActions.appendChild(itemStatus);
     itemActions.appendChild(deleteButton);
     listItem.appendChild(itemImage);
     listItem.appendChild(itemInfo);
