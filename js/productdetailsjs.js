@@ -57,8 +57,31 @@ function dynamicContentDetails(ob) {
   // add to cart using local storage
   let buttonText = document.createTextNode("Add to Cart");
   buttonTag.appendChild(buttonText);
+  // region- PopUp To Login Meesage
+  function showModal(message, link) {
+    var modal = document.getElementById("myModal");
+    var modalContent = document.querySelector(".modal-content p");
+
+    // Use innerHTML to include HTML tags like <a>
+    modalContent.innerHTML = message + ' <a href="' + link + '" target="_blank">Click here To Login</a>.';
+
+    var span = document.getElementsByClassName("close")[0];
+    span.onclick = function () {
+      modal.style.display = "none";
+    };
+
+    modal.style.display = "block";
+  }
+
+  //endregion
+
   buttonTag.onclick = function () {
     var userEmail = localStorage.getItem("userEmail");
+    // Add condition to check if userEmail is null
+    if (userEmail === null) {
+      showModal("Please log in or provide an email address.", "./Validation Login and Sign-In/Login/Login.html");
+      return;
+    }
     ob.UserEmail = userEmail;
     ob.ConfirmEmail = false;
     var data_object = JSON.stringify(ob);

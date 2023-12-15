@@ -44,7 +44,6 @@ let men = document.getElementById("men");
 let women = document.getElementById("women");
 let Mix = document.getElementById("Mix");
 
-
 // region - "Configurations Firebase"
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
@@ -129,9 +128,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const signOutButton = document.getElementById("logOutButton");
   signOutButton.addEventListener("click", (e) => {
+    const userEmail = localStorage.getItem("userEmail");
+
     signOut(auth)
       .then(() => {
         sessionStorage.removeItem("userRole");
+        localStorage.removeItem("userEmail"); // Corrected this line
         window.location.href = "LogOutReloadToHomePage.html";
       })
       .catch((error) => {
