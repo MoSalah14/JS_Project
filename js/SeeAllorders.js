@@ -24,7 +24,9 @@ function displaycartitems() {
 
   // Loop through each item in the cart
   cartitems.forEach((item) => {
-    // Create HTML elements for the item
+    if (item.ConfirmEmail) {
+      return; // Skip this item if it's confirmed
+    }
     var itemImage = document.createElement("img");
     var itemName = document.createElement("span");
     var itemPrice = document.createElement("span");
@@ -37,9 +39,7 @@ function displaycartitems() {
 
     //region- "Set attributes and content for the HTML elements"
     if (item && item.photos) {
-      itemImage.src = item.photos.startsWith("https")
-        ? item.photos
-        : `./images/${item.photos}`;
+      itemImage.src = item.photos.startsWith("https") ? item.photos : `./images/${item.photos}`;
     }
     itemName.textContent = item.name;
     itemPrice.textContent = item.price;
@@ -70,7 +70,6 @@ function displaycartitems() {
       // Move the declaration of cartitems above its usage
       var index = cartitems.indexOf(item);
       var iteeem = cartitems[index];
-      debugger;
       cartitems[index].ConfirmEmail = true;
       localStorage.setItem("cartitems", JSON.stringify(cartitems));
       location.reload();
