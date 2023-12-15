@@ -1,5 +1,3 @@
-
-
 //region -"Catch Tags"
 var productNameInput = document.getElementById("productName");
 var productproductType = document.getElementById("productType");
@@ -18,8 +16,9 @@ if (localStorage.getItem("myProducts") != null) {
   productsContainer = [];
 }
 
+displayCategories();
+//region-AddProduct
 function addProduct() {
-  debugger;
   if (mainBtn.innerHTML == "Add Product") {
     var product = {
       type: productproductType.value,
@@ -29,15 +28,39 @@ function addProduct() {
       brand: productCategoryInput.value,
       price: productPriceInput.value,
     };
-
     productsContainer.push(product);
     localStorage.setItem("myProducts", JSON.stringify(productsContainer));
-    console.log(productsContainer);
     clearForm();
     dispayProducts(productsContainer);
   }
 }
+//endregion
 
+//region- AddCategory Display in AddProduct
+function displayCategories() {
+  const categories = JSON.parse(localStorage.getItem("myCategory")) || [];
+  // Populate the category dropdown
+  var categorySelect = document.getElementById("productType");
+  categorySelect.innerHTML = "";
+  categories.forEach((category) => {
+    var option = document.createElement("option");
+    option.text = category.CategoryName;
+    categorySelect.add(option);
+  });
+}
+//endregion
+
+//region-Update Category List
+function updateCategoryList(newCategory) {
+  const existingCategories = JSON.parse(localStorage.getItem("myCategory")) || [];
+  if (!existingCategories.includes(newCategory)) {
+    existingCategories.push(newCategory);
+    localStorage.setItem("myCategory", JSON.stringify(existingCategories));
+  }
+}
+//endregion
+
+//region-Display Product
 function dispayProducts(productLiest) {
   var cartoona = "";
 
@@ -50,11 +73,9 @@ function dispayProducts(productLiest) {
         <td> ${productLiest[i].brand}</td>
         <td>
         <img style="height: 50px; width: 50px;" src="${
-        productLiest[i].photos &&
-        (productLiest[i].photos.startsWith('http')
-        ? productLiest[i].photos
-        : 'images/' + productLiest[i].photos)
-         }" alt="">
+          productLiest[i].photos &&
+          (productLiest[i].photos.startsWith("http") ? productLiest[i].photos : "images/" + productLiest[i].photos)
+        }" alt="">
 </td>
 
         <td> ${productLiest[i].description}</td>
@@ -66,6 +87,7 @@ function dispayProducts(productLiest) {
   }
   document.getElementById("tableRow").innerHTML = cartoona;
 }
+//endregion
 
 function clearForm() {
   productproductType.value = "";
@@ -102,9 +124,7 @@ function setForm(productIndex) {
   productCategoryInput.value = productsContainer[productIndex].brand;
   productDescInput.value = productsContainer[productIndex].description;
   mainBtn.innerHTML = "update product";
-  document
-    .getElementById("mainBtn")
-    .setAttribute("onclick", `updateProduct(${productIndex})`);
+  document.getElementById("mainBtn").setAttribute("onclick", `updateProduct(${productIndex})`);
 }
 
 function updateProduct(productIndex) {
