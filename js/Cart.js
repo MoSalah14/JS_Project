@@ -9,7 +9,7 @@ var userCartItems = cartitems.filter(function (item) {
   return item.UserEmail === userEmail;
 });
 // userCartItems contains all cart items related to the user's email
-console.log(userCartItems);
+//console.log(userCartItems);
 cartitems = [];
 cartitems = userCartItems;
 
@@ -33,8 +33,8 @@ function displaycartitems() {
 
   // Loop through each item in the cart
   cartitems.forEach((item) => {
-    debugger;
-    // console.log("Item Image:", item.image);
+    //debugger;
+    // //console.log("Item Image:", item.image);
 
     var listItem = document.createElement("li");
     var itemImage = document.createElement("img");
@@ -46,30 +46,26 @@ function displaycartitems() {
     var itemQuantity = document.createElement("input");
     var itemTotal = document.createElement("span");
     var deleteButton = document.createElement("button");
-    console.log(item.photos);
+    //console.log(item.photos);
 
     // Set attributes and content for the HTML elements
     // var isConfirmed = localStorage.getItem('ConfirmEmail') === 'true';
 
-
-
-// Set the text content based on the value of confirmemail
+    // Set the text content based on the value of confirmemail
     if (item && item.photos) {
-      itemImage.src = item.photos.startsWith("https")
-      ? item.photos
-      : `./images/${item.photos}`;
+      itemImage.src = item.photos.startsWith("https") ? item.photos : `./images/${item.photos}`;
     }
-    debugger
+    //debugger
     var IsConfirmed = item.ConfirmEmail == true;
     itemName.textContent = item.name;
     itemPrice.textContent = item.price;
     itemQuantity.type = "number";
     itemQuantity.min = "1";
     itemQuantity.value = "1";
-    itemStatus.textContent = IsConfirmed ? 'Confirmed' : 'Pending';
+    itemStatus.textContent = IsConfirmed ? "Confirmed" : "Pending";
     itemTotal.textContent = item.price;
     deleteButton.textContent = "X";
-    console.log(item.image);
+    //console.log(item.image);
 
     // Add classes to the HTML elements
     itemInfo.classList.add("item-info");
@@ -88,7 +84,7 @@ function displaycartitems() {
       var totalPrice = quantity * price;
       itemTotal.textContent = `EGP ${totalPrice.toFixed(2)}`;
       updateCartTotal();
-      console.log(totalPrice);
+      ////console.log(totalPrice);
     });
     // Add event listener for the delete button
     deleteButton.addEventListener("click", () => {
@@ -136,7 +132,8 @@ function displaycartitems() {
     itemInfo.appendChild(itemName);
     itemInfo.appendChild(itemPrice);
     itemActions.appendChild(itemQuantity);
-    itemActions.appendChild(itemTotal);
+    //  itemTotal.textContent = `EGP ${itemTotal.toFixed(2)}`;
+    itemActions.appendChild(itemTotal).textContent = `EGP ${parseFloat(itemTotal.textContent).toFixed(2)}`;
     itemActions.appendChild(itemStatus);
     itemActions.appendChild(deleteButton);
     listItem.appendChild(itemImage);
@@ -151,13 +148,13 @@ function displaycartitems() {
 }
 
 function updateCartTotal() {
-  debugger;
+  //debugger;
 
   var cartTotal = document.getElementById("cart-total");
   let total = 0;
   // Loop through each item in the cart and add up the total price
   cartitems.forEach((item) => {
-    debugger;
+    //debugger;
     var quantity = parseInt(item.quantity) || 1;
     var price = parseInt(item.price);
     var totalPrice = quantity * price;
