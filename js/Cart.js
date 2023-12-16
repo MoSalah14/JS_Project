@@ -33,9 +33,7 @@ function displaycartitems() {
 
   // Loop through each item in the cart
   cartitems.forEach((item) => {
-    //debugger;
     // //console.log("Item Image:", item.image);
-
     var listItem = document.createElement("li");
     var itemImage = document.createElement("img");
     var itemInfo = document.createElement("div");
@@ -83,8 +81,13 @@ function displaycartitems() {
       var price = parseInt(item.price);
       var totalPrice = quantity * price;
       itemTotal.textContent = `EGP ${totalPrice.toFixed(2)}`;
+      // Dynamically add or update the quantity property
+      if (!item.hasOwnProperty("quantity")) {
+        item.quantity = quantity;
+      } else {
+        item.quantity = quantity;
+      }
       updateCartTotal();
-      ////console.log(totalPrice);
     });
     // Add event listener for the delete button
     deleteButton.addEventListener("click", () => {
@@ -146,18 +149,19 @@ function displaycartitems() {
 
 function updateCartTotal() {
   //debugger;
-
   var cartTotal = document.getElementById("cart-total");
   let total = 0;
   // Loop through each item in the cart and add up the total price
   cartitems.forEach((item) => {
-    //debugger;
+    debugger;
     var quantity = parseInt(item.quantity) || 1;
     var price = parseInt(item.price);
     var totalPrice = quantity * price;
     total += totalPrice;
-    cartTotal.textContent = `Total: EGP ${total.toFixed(2)}`;
   });
+
+  // Update the cart total outside the loop
+  cartTotal.textContent = `Total: EGP ${total.toFixed(2)}`;
 }
 
 //checkout button
