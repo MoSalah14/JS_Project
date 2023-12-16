@@ -32,13 +32,16 @@
                 <div id="shopName"><a href="home.html"> <b>NADER</b>shop </a></div>
 
                 <div class="search">
-                    <input type='text' placeholder="ًًWhat Are You Looking For?" />
-                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <input type='text' id="searchInput" placeholder="Search Products" oninput="performSearch()" />
+                    <div id="searchResults" class="search-results"></div>
                 </div>
 
                 <div id="user">
-                    <a href="./Cart.html"> <i class="fa fa-cart-arrow-down" aria-hidden="true"></i></i></a>
-                    <a href="../Validation Login and Sign-In/Login/Login.html">
+                    <a href="./Wishlist.html" target="_blank"> <i class="fa fa-heart" aria-hidden="true"></i></a>
+                    <a href="./Cart.html" target="_blank"> <i class="fa fa-cart-arrow-down"
+                            aria-hidden="true"></i></i></a>
+
+                    <a href="../Validation Login and Sign-In/Login/Login.html" target="_blank">
                         <button id="logInButton">Log In</button>
                     </a>
                     <button id="logOutButton">Logout</button>
@@ -47,10 +50,10 @@
             </div>
             <div>
                 <nav>
-                    <a href="./Product.html" id="addProductButton">Add Product</a>
-                    <a href="./home.html">Home</a>
-                    <a href="./Category.html" id="HomeCategory">AddCategory</a>
-                    <a href="SeeAllOrders.html" id="AllOrderPage">All Oorders</a>
+                    <a href="./Product.html" target="_blank" id="addProductButton">Add Product</a>
+                    <a href="./home.html" target="_blank">Home</a>
+                    <a href="./Category.html" target="_blank" id="HomeCategory">AddCategory</a>
+                    <a href="SeeAllOrders.html" target="_blank" id="AllOrderPage">All Oorders</a>
                     <a href="#">About Us</a>
                 </nav>
             </div>

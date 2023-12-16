@@ -1,19 +1,32 @@
-var arrayString = localStorage.getItem("wishlist");
-var cartItems = JSON.parse(arrayString);
-window.onload = checkArray;
+// Retrieve the user's email from local storage
+var userEmail = localStorage.getItem("userEmail");
+debugger;
+
+// Retrieve wishlist items from local storage
+var wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+// Filter wishlist items based on the user's email
+var userCartItems = wishlist.filter(function (item) {
+  return item.UserEmail === userEmail;
+});
+
+// Display the filtered items
+displayCartItems(userCartItems);
 
 function checkArray() {
-  if (cartItems.length === 0) {
-    document.getElementById("contentCart").style.display = "block";
-    document.getElementById("cart").style.display = "none";
-  } else if (cartItems.length > 0) {
-    document.getElementById("contentCart").style.display = "none";
-    document.getElementById("cart").style.display = "block";
+  var contentCart = document.getElementById("contentCart");
+  var cart = document.getElementById("cart");
+
+  if (wishlist.length === 0) {
+    contentCart.style.display = "block";
+    cart.style.display = "none";
+  } else {
+    contentCart.style.display = "none";
+    cart.style.display = "block";
   }
 }
 
-function displayCartItems() {
-  var cartItems = JSON.parse(localStorage.getItem("wishlist")) || [];
+function displayCartItems(items) {
   var cartList = document.getElementById("cart-items");
   var cartTotal = document.getElementById("cart-total");
   var cartConfirm = document.getElementById("cart-confirm");
@@ -21,7 +34,7 @@ function displayCartItems() {
   cartList.innerHTML = "";
 
   // Loop through each item in the cart
-  cartItems.forEach((item) => {
+  items.forEach((item) => {
     // Create HTML elements for the item
     var itemImage = document.createElement("img");
     var itemName = document.createElement("span");
@@ -31,8 +44,12 @@ function displayCartItems() {
     var itemActions = document.createElement("div");
     var deleteButton = document.createElement("button");
 
-    // Set attributes and content for the HTML elements
-    itemImage.src = item.image;
+    if (item.photos.startsWith("http") || item.photos.startsWith("www")) {
+      itemImage.src = item.photos;
+    } else {
+      itemImage.src = "./images/" + item.photos;
+    }
+
     itemName.textContent = item.name;
     itemPrice.textContent = item.price;
     deleteButton.textContent = "X";
@@ -43,14 +60,13 @@ function displayCartItems() {
     itemPrice.classList.add("item-price");
     itemActions.classList.add("item-actions");
 
-    // Add event listeners for the quantity input and delete button
-
+    // Add event listeners for the delete button
     deleteButton.addEventListener("click", () => {
-      var index = cartItems.indexOf(item);
-      cartItems.splice(index, 1);
-      localStorage.setItem("wishlist", JSON.stringify(cartItems));
+      var index = wishlist.indexOf(item);
+      wishlist.splice(index, 1);
+      localStorage.setItem("wishlist", JSON.stringify(wishlist));
       location.reload();
-      displayCartItems();
+      displayCartItems(userCartItems);
       updateCartTotal();
     });
 
@@ -66,5 +82,4 @@ function displayCartItems() {
     cartList.appendChild(listItem);
   });
 }
-
-displayCartItems();
+checkArray();

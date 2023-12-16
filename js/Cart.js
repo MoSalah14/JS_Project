@@ -115,12 +115,9 @@ function displaycartitems() {
         email: iteeem.email,
       });
       if (foundObjects.length > 0) {
-        alert("Objects found:", foundObjects);
-
         AllProducts = AllProducts.filter((obj) => !foundObjects.includes(obj));
         localStorage.setItem("AllProducts", JSON.stringify(AllProducts));
       } else {
-        alert("No objects found");
       }
 
       // Update after the asynchronous operation (no page reload)
