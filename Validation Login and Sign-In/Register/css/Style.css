@@ -11,20 +11,28 @@ body {
   justify-content: center;
   align-items: center;
   padding: 10px;
-  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+  background: #222222;
+  color: black;
 }
 .container {
-  max-width: 700px;
+  max-width: 900px;
   width: 100%;
-  background-color: #fff;
-  padding: 25px 30px;
+  background-color: white;
   border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+.container .content{
+  padding: 25px 30px;
+  
 }
 .container .title {
   font-size: 25px;
-  font-weight: 500;
+  font-weight: 700;
   position: relative;
+  margin-bottom: 40px;
+  border-radius: 5px;
+  background: linear-gradient(-135deg, #151212, #0b0d17);
+  color: white;
+  padding: 10px;
 }
 .container .title::before {
   content: "";
@@ -34,7 +42,8 @@ body {
   height: 3px;
   width: 30px;
   border-radius: 5px;
-  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+  margin: 10px;
+  background: linear-gradient(135deg, #17a589, #3498db);
 }
 .content form .user-details {
   display: flex;
@@ -51,6 +60,12 @@ form .input-box span.details {
   font-weight: 500;
   margin-bottom: 5px;
 }
+form .input-box #UserRole {
+  background-color: buttonface; 
+  width: 150px;
+  height: 30px;
+  border-radius: 5px;
+}
 .user-details .input-box input {
   height: 45px;
   width: 100%;
@@ -58,13 +73,13 @@ form .input-box span.details {
   font-size: 16px;
   border-radius: 5px;
   padding-left: 15px;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
   border-bottom-width: 2px;
   transition: all 0.3s ease;
 }
 .user-details .input-box input:focus,
 .user-details .input-box input:valid {
-  border-color: #9b59b6;
+  border-color: #17a589;
 }
 form .gender-details .gender-title {
   font-size: 20px;
@@ -114,11 +129,7 @@ form .button input {
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: linear-gradient(135deg, #71b7e6, #9b59b6);
-}
-form .button input:hover {
-  /* transform: scale(0.99); */
-  background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+  background: linear-gradient(-135deg, #151212, #0b0d17);
 }
 .error-message {
   color: #ff0000;
