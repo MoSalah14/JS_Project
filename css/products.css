@@ -28,6 +28,12 @@ body,h1,h2,h3,p,ul,li,table {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
+  #fform{
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
   label {
     font-weight: bold;
   }
