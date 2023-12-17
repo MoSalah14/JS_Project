@@ -8,7 +8,7 @@ var cartitems = JSON.parse(localStorage.getItem("cartitems")) || [];
 var userCartItems = cartitems.filter(function (item) {
   return item.UserEmail === userEmail;
 });
-// userCartItems contains all cart items related to the user's email
+//userCartItems contains all cart items related to the user's email
 //console.log(userCartItems);
 cartitems = [];
 cartitems = userCartItems;
@@ -82,11 +82,9 @@ function displaycartitems() {
       var totalPrice = quantity * price;
       itemTotal.textContent = `EGP ${totalPrice.toFixed(2)}`;
       // Dynamically add or update the quantity property
-      if (!item.hasOwnProperty("quantity")) {
-        item.quantity = quantity;
-      } else {
-        item.quantity = quantity;
-      }
+      if (!item.hasOwnProperty("quantity")) item.quantity = quantity;
+      else item.quantity = quantity;
+
       updateCartTotal();
     });
     // Add event listener for the delete button

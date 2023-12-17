@@ -57,11 +57,7 @@ function deleteProduct(productIndex) {
 function searchProducts(term) {
   var searchProducts = [];
   for (var i = 0; i < CategoryContainer.length; i++) {
-    if (
-      CategoryContainer[i].CategoryName.toLowerCase().includes(
-        term.toLowerCase()
-      )
-    ) {
+    if (CategoryContainer[i].CategoryName.toLowerCase().includes(term.toLowerCase())) {
       searchProducts.push(CategoryContainer[i]);
     }
   }
@@ -72,9 +68,7 @@ function setForm(productIndex) {
   CategoryNameInput.value = CategoryContainer[productIndex].CategoryName;
   CategoryDescInput.value = CategoryContainer[productIndex].desc;
   mainBtn.innerHTML = "update Category";
-  document
-    .getElementById("mainBtn")
-    .setAttribute("onclick", `updateProduct(${productIndex})`);
+  document.getElementById("mainBtn").setAttribute("onclick", `updateProduct(${productIndex})`);
 }
 
 function updateProduct(productIndex) {

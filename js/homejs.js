@@ -74,6 +74,8 @@ import {
 //endregion//////////
 
 
+
+//region- Check user role and show/hide the button
 const dp = getDatabase();
 const auth = getAuth();
 const user = auth.currentUser;
@@ -125,7 +127,10 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   });
+//endregion
 
+
+//region- Sign Out Action 
   const signOutButton = document.getElementById("logOutButton");
   signOutButton.addEventListener("click", (e) => {
     const userEmail = localStorage.getItem("userEmail");
@@ -144,6 +149,10 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+//endregion
+
+
+//region- DispalyCategory
 var count = 0;
 function getdata() {
   var storedArrayString = localStorage.getItem("myProducts");
@@ -164,6 +173,8 @@ function getdata() {
   }
 }
 getdata();
+
+//endregion
 
 function searchProducts(term) {
   var searchProducts = [];
