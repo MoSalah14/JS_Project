@@ -1,3 +1,6 @@
+//
+//
+//
 function getallClothes(ob) {
   let boxDiv = document.createElement("div");
   boxDiv.id = "box";
@@ -64,16 +67,9 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-import {
-  getDatabase,
-  ref,
-  child,
-  get,
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getDatabase, ref, child, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 //endregion//////////
-
-
 
 //region- Check user role and show/hide the button
 const dp = getDatabase();
@@ -127,10 +123,9 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   });
-//endregion
+  //endregion
 
-
-//region- Sign Out Action 
+  //region- Sign Out Action
   const signOutButton = document.getElementById("logOutButton");
   signOutButton.addEventListener("click", (e) => {
     const userEmail = localStorage.getItem("userEmail");
@@ -150,7 +145,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 //endregion
-
 
 //region- DispalyCategory
 var count = 0;
@@ -179,11 +173,7 @@ getdata();
 function searchProducts(term) {
   var searchProducts = [];
   for (var i = 0; i < productsContainer.length; i++) {
-    if (
-      productsContainer[i].productName
-        .toLowerCase()
-        .includes(term.toLowerCase())
-    ) {
+    if (productsContainer[i].productName.toLowerCase().includes(term.toLowerCase())) {
       searchProducts.push(productsContainer[i]);
     }
   }

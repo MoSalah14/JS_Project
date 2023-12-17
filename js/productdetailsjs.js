@@ -67,7 +67,7 @@ function dynamicContentDetails(ob) {
     var modalContent = document.querySelector(".modal-content p");
 
     // Use innerHTML to include HTML tags like <a>
-    modalContent.innerHTML = message + ' <a href="' + link + '" target="_blank">Click here To Login</a>.';
+    modalContent.innerHTML = message + ' <a href="' + link + '" target="_blank">Click here</a>.';
 
     var span = document.getElementsByClassName("close")[0];
     span.onclick = function () {
@@ -85,6 +85,9 @@ function dynamicContentDetails(ob) {
     if (userEmail === null) {
       showModal("Please log in or provide an email address.", "./Validation Login and Sign-In/Login/Login.html");
       return;
+    }
+    else{
+      showModal("Added To Your Cart Thanx for your Shopping","./Home.html")
     }
     ob.UserEmail = userEmail;
     ob.ConfirmEmail = false;
