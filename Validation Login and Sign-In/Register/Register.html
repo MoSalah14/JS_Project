@@ -156,11 +156,9 @@
       const defaultRole = "Customer";
       roleSelect.value = defaultRole;
 
-      // roleSelect.addEventListener("change", () => {
-      //   const selectedRole = roleSelect.value;
-      //   roleMessage.textContent =
-      //     selectedRole === "Admin" ? "Please call 19888 for assistance." : "";
-      // });
+      const isNameValid = (name) => {
+  return /^[a-zA-Z]+$/.test(name) && name.length >= 2;
+};
 
       submitButton.addEventListener("click", (e) => {
         e.preventDefault();
@@ -173,15 +171,15 @@
         const password = getFormValueById("Password");
         const confirmPassword = getFormValueById("ConfirmPass");
 
-        if (firstName.length < 2) {
-          displayError("firstNameError", "Must be 2 or More Char");
-          return;
-        }
+        if (!isNameValid(firstName)) {
+    displayError("firstNameError", "Must be 2 or More Characters and Alphabetic");
+    return;
+  }
 
-        if (lastName.length < 2) {
-          displayError("lastNameError", "Must be 2 or More Char");
-          return;
-        }
+  if (!isNameValid(lastName)) {
+    displayError("lastNameError", "Must be 2 or More Characters and Alphabetic");
+    return;
+  }
 
         if (!emailRegex.test(email)) {
           displayError("emailError", "Invalid Email Format (Gmail or Yahoo)");
