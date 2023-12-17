@@ -93,16 +93,29 @@ document.addEventListener("DOMContentLoaded", function () {
         const CategoryButton = document.getElementById("HomeCategory");
         const addProductButton = document.getElementById("addProductButton");
         const AllOrderPage = document.getElementById("AllOrderPage");
+        const cartButton = document.querySelector("#user a[href='./Cart.html']");
+const wishlistButton = document.querySelector("#user a[href='./Wishlist.html']");
+
         if (addProductButton) {
           if (userRole === "Admin") {
             CategoryButton.style.display = "inline";
             addProductButton.style.display = "inline";
             AllOrderPage.style.display = "inline";
+            
           } else {
             // Hide button
             addProductButton.style.display = "none";
             CategoryButton.style.display = "none";
             AllOrderPage.style.display = "none";
+            
+          }
+        }
+        if (userRole === "Admin") {
+          if (cartButton) {
+            cartButton.style.display = "none";
+          }
+          if (wishlistButton) {
+            wishlistButton.style.display = "none";
           }
         }
         // Store user role in session storage
