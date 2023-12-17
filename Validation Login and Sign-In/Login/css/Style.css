@@ -5,28 +5,27 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-html,
 body {
-  display: grid;
-  height: 100%;
-  width: 100%;
-  place-items: center;
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
   background: #f2f2f2;
-  /* background: linear-gradient(-135deg, #c850c0, #4158d0); */
+  margin: 0;
 }
 ::selection {
   background: #4158d0;
   color: #fff;
 }
 .wrapper {
-  width: 380px;
+  width: 480px;
   background: #fff;
   border-radius: 15px;
   box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
 }
 .wrapper .title {
-  font-size: 35px;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 400;
   text-align: center;
   line-height: 100px;
   color: #fff;
